@@ -41,13 +41,10 @@ dependencies {
 
 ## Usage
 
-Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
-`public CameraPosition getCameraPosition(int position)` or `public List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment.
+1. Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
+`CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
-To create a CameraPosition: 
-`CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
-
-Include the view in your xml layout
+2. Include the view in your xml layout
 
 ```xml
 <com.github.nitrico.mapviewpager.MapViewPager
@@ -59,7 +56,7 @@ Include the view in your xml layout
         app:mapGravity="1"
         app:mapOffset="56dp" />
 ```
-find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+3. find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
 ##### XML attributes
 
