@@ -10,14 +10,14 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
 
 **Notice:**
-* Not fully tested yet but it works perfectly on my Nexus 5 running Marshmallow
-* It is my first Android lib. Tips, suggestions or any other comments are welcome
+* Not fully tested yet but it works perfectly on my Nexus 5 running Marshmallow.
+* It is my first Android lib. Tips, suggestions or any other comments are welcome.
 
 
 ## Features
 
-- [x] Any amount of markers per fragment supported
-- [x] Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated
+- [x] Supports any amount of markers per fragment.
+- [x] Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated.
 
 
 ## Download
@@ -58,7 +58,7 @@ Include the view in your xml layout
         app:mapOffset="56dp" />
 ```
 
-Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
 
 #### XML attributes
 
@@ -67,7 +67,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 |**viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
 |**mapWeight**|integer|`1`|Weight of the map in the layout|
 |**mapGravity**|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|**mapOffset**|dimension|`0dp`||
+|**mapOffset**|dimension|`0dp`|Map *padding* when displaing multiple markers on the map|
 |**mapPaddingLeft**|dimension|`0dp`|Left map padding|
 |**mapPaddingTop**|dimension|`0dp`|Top map padding|
 |**mapPaddingRight**|dimension|`0dp`|Right map padding|
