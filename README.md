@@ -74,7 +74,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter);
 |**mapPaddingBottom**|dimension|`0dp`|Bottom map padding|
 |**markersAlpha**|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
-#### public methods
+#### Public methods
 
 ```java
 void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter) 
@@ -98,7 +98,7 @@ CameraUpdate getDefaultPosition(int page)
 List<CameraUpdate> getDefaultPositions()
 ```
 
-#### Advanced
+#### Builder
 
 If you want more customization on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` and pass their instances to create the MapViewPager object using the **MapViewPager.Builder** class. For example:
 
