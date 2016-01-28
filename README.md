@@ -41,6 +41,8 @@ dependencies {
 
 ## Usage
 
+> Don't forget to add the right **permissions** and your Google Maps **API key** to your `AndroidManifest.xml`
+
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. 
 
@@ -59,8 +61,6 @@ Include the view in your xml layout
 ```
 
 Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
-
-> **Don't forget to add the right permissions and your Google Maps API key to your AndroidManifest.xml**
 
 #### XML attributes
 
