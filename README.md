@@ -112,7 +112,7 @@ Check the examples on the app directory.
 
 I'm available to be hired, Contact me!
 
-|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Twitter](https://twitter.com/nitrico/)
+|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
 |---|---|---|
 
 ## License
