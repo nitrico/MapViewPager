@@ -44,7 +44,7 @@ dependencies {
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. 
 
-* To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
+> To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
 Include the view in your xml layout
 
