@@ -41,12 +41,12 @@ dependencies {
 
 ## Usage
 
-* Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
+Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. 
 
-To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
+* To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
-* Include the view in your xml layout
+Include the view in your xml layout
 
 ```xml
 <com.github.nitrico.mapviewpager.MapViewPager
@@ -59,7 +59,7 @@ To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude
         app:mapOffset="56dp" />
 ```
 
-* Find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+Find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
 ##### XML attributes
 
@@ -78,8 +78,8 @@ To create a CameraPosition: `CameraPosition.builder().target(new LatLng(latitude
 ##### public methods
 
 ```java
-void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) 
-void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter, @Nullable Callback callback)
+void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter) 
+void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter, MapViewPager.Callback callback)
 
 // General getters
 GoogleMap getMap()
@@ -99,7 +99,7 @@ CameraUpdate getDefaultPosition(int page)
 List<CameraUpdate> getDefaultPositions()
 ```
 
-#### Advanced
+### Advanced
 
 If you want more customization on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` and pass their instances to create the MapViewPager object using the Builder object. For example:
 
