@@ -10,7 +10,7 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 
 #### Gradle
 
-```
+```gradle
 repositories {
     maven {
         url  "http://dl.bintray.com/moreno/maven" 
