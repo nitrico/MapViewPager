@@ -7,8 +7,8 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 
 ## Features
 
-- [x] Support for more than 1 marker per fragment
-- [x] Default position for fragments with more than one marker automatically calculated
+- [x] Any amount of markers per fragment supported
+- [x] Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated
 
 
 ## Download
@@ -28,10 +28,7 @@ dependencies {
 ```
 
 
-
 ## Usage
-
-##### For 1 (or 0) markers per fragment:
 
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `public CameraPosition getCameraPosition(int position)` or `public List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment.
@@ -50,7 +47,7 @@ Include the view in your xml layout
         app:mapGravity="1"
         app:mapOffset="56dp" />
 ```
-and call `mapViewPager.start(this, adapter, callback /*optional*/);` passing the AppCompatActivity (or FragmentActivity) and adapter instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+and call `mapViewPager.start(this, adapter, /*optional*/callback);` passing the AppCompatActivity (or FragmentActivity) and adapter instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
 ##### XML attributes
 
@@ -58,7 +55,7 @@ and call `mapViewPager.start(this, adapter, callback /*optional*/);` passing the
 |---|---|---|---|
 |viewPagerWeight|integer|1|Weight of the viewpager in the layout|
 |mapWeight|integer|1|Weight of the map in the layout|
-|mapGravity|integer (0..3)|1|0 = left, 1 = top, 2 = right, 3 = bottom|
+|mapGravity|integer (0..3)|1|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
 |mapOffset|dimension|0dp||
 |mapPaddingLeft|dimension|0dp|Left padding for the map|
 |mapPaddingTop|dimension|0dp|Top padding for the map|
