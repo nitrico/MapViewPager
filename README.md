@@ -58,7 +58,7 @@ Include the view in your xml layout
         app:mapOffset="56dp" />
 ```
 
-Find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
 #### XML attributes
 
@@ -107,14 +107,15 @@ mvp = new MapViewPager.Builder(this)            // this is Context
         .mapFragment(map)                       // map is SupportMapFragment
         .viewPager(viewPager)                   // viewPager is ViewPager
         .adapter(adapter)                       // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
-        .markersAlpha(alpha)                    // Optional.
-        .mapPadding(left, top, right, bottom)   // Optional.
-        .mapOffset(offset)                      // Optional.
-        .callback(callback)                     // Optional. callback is MapViewPager.Callback
+        .callback(callback)                     // Optional callback is MapViewPager.Callback
+        .markersAlpha(alpha)                    // Optional
+        .mapPadding(left, top, right, bottom)   // Optional
+        .mapOffset(offset)                      // Optional
         .build();
 ```
 
 Check the examples on the [app directory](https://github.com/nitrico/MapViewPager/tree/master/app).
+
 
 ## Author
 
@@ -124,6 +125,7 @@ I'm available to be hired, Contact me!
 
 |[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
 |---|---|---|---|
+
 
 ## License
 ```
