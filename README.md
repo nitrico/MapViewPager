@@ -1,6 +1,21 @@
 [ ![Download](https://api.bintray.com/packages/moreno/maven/MapViewPager/images/download.svg) ](https://bintray.com/moreno/maven/MapViewPager/_latestVersion)
 # MapViewPager
 
+## Download
+
+#### Gradle
+
+```
+repositories {
+    maven {
+        url  "http://dl.bintray.com/moreno/maven" 
+    }
+}
+dependencies {
+    compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
+}
+```
+
 ## License
 ```
 Copyright 2016 Miguel Ángel Moreno
