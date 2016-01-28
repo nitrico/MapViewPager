@@ -4,7 +4,7 @@
 
 Android library that connects ViewPager fragments with Google Maps markers and makes them work together.
 
-!(http://i.imgur.com/tZ7wO4D.png) !(http://i.imgur.com/mfbp5ps.png) !(http://imgur.com/C4dVMU7)
+![screenshot](http://i.imgur.com/tZ7wO4D.png) ![screenshot](http://i.imgur.com/mfbp5ps.png) ![screenshot](http://imgur.com/C4dVMU7)
 
 
 ## Features
