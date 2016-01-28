@@ -65,17 +65,17 @@ find the view in your activity then and call `mapViewPager.start(this, adapter);
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
-|viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
-|mapWeight|integer|`1`|Weight of the map in the layout|
-|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|mapOffset|dimension|`0dp`||
-|mapPaddingLeft|dimension|`0dp`|Left map padding|
-|mapPaddingTop|dimension|`0dp`|Top map padding|
-|mapPaddingRight|dimension|`0dp`|Right map padding|
-|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
-|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
+|**viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
+|**mapWeight**|integer|`1`|Weight of the map in the layout|
+|**mapGravity**|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
+|**mapOffset**|dimension|`0dp`||
+|**mapPaddingLeft**|dimension|`0dp`|Left map padding|
+|**mapPaddingTop**|dimension|`0dp`|Top map padding|
+|**mapPaddingRight**|dimension|`0dp`|Right map padding|
+|**mapPaddingBottom**|dimension|`0dp`|Bottom map padding|
+|**markersAlpha**|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
-##### MapViewPager public methods
+##### public methods
 
 ```java
 void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) 
@@ -115,7 +115,7 @@ mvp = new MapViewPager.Builder(this)            // this is Context
         .build();
 ```
 
-Check the examples on the app directory.
+Check the examples on the [app directory](https://github.com/nitrico/MapViewPager/tree/master/app).
 
 ## Author
 
