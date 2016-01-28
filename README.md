@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
 }
 ```
@@ -59,6 +59,8 @@ Include the view in your xml layout
 ```
 
 Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
+
+> **Don't forget to add the right permissions and your Google Maps API key to your AndroidManifest.xml**
 
 #### XML attributes
 
