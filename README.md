@@ -5,6 +5,11 @@
 Android library that connects ViewPager fragments with Google Maps markers and makes them work together.
 
 
+## Features
+
+- [x] Support for more than 1 marker per fragment
+- [x] Default position for fragments with more than one marker automatically calculated
+
 
 ## Download
 
@@ -26,6 +31,31 @@ dependencies {
 
 ## Usage
 
+##### For 1 (or 0) markers per fragment:
+
+Create a ViewPager adapter extending from `MapViewPager.Adapter` and override method
+```java
+public CameraPosition getCameraPosition(int position)
+``` 
+returning the marker camera position for fragment each fragment.
+
+You can create it like that 
+```
+CameraPosition.builder().target(new LatLng(latitude, longitud)).zoom(zoom).build()
+```
+
+*MapViewPager.Adapter extends from FragmentStatePagerAdapter so, like in any other ViewPager, you also need to override methods*
+```java
+public int getCount()
+public Fragment getItem(int position)
+```
+and probably want to override
+```java
+public CharSequence getPageTitle(int position)
+```
+
+Include it in your xml layout
+
 ```xml
 <com.github.nitrico.mapviewpager.MapViewPager
         android:id="@+id/mapViewPager"
@@ -36,6 +66,8 @@ dependencies {
         app:mapGravity="1"
         app:mapOffset="56dp" />
 ```
+
+
 
 #### Advanced usage
 
