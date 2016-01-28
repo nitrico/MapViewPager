@@ -19,6 +19,10 @@ dependencies {
 }
 ```
 
+## Usage
+
+Check the examples in the app folder!
+
 ## License
 ```
 Copyright 2016 Miguel Ángel Moreno
