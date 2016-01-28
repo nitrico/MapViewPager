@@ -54,15 +54,15 @@ and call `mapViewPager.start(this, adapter, /*optional*/callback);` passing the 
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
-|viewPagerWeight|integer|1|Weight of the viewpager in the layout|
-|mapWeight|integer|1|Weight of the map in the layout|
-|mapGravity|integer (0..3)|1|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|mapOffset|dimension|0dp||
-|mapPaddingLeft|dimension|0dp|Left padding for the map|
-|mapPaddingTop|dimension|0dp|Top padding for the map|
-|mapPaddingRight|dimension|0dp|Right padding for the map|
-|mapPaddingBottom|dimension|0dp|Bottom padding for the map|
-|markersAlpha|float (0..1)|0.4|Opacity of markers when deactivated|
+|viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
+|mapWeight|integer|`1`|Weight of the map in the layout|
+|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
+|mapOffset|dimension|`0dp`||
+|mapPaddingLeft|dimension|`0dp`|Left map padding|
+|mapPaddingTop|dimension|`0dp`|Top map padding|
+|mapPaddingRight|dimension|`0dp`|Right map padding|
+|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
+|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
 ##### MapViewPager public methods
 
