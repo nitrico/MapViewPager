@@ -1,6 +1,8 @@
 [ ![Download](https://api.bintray.com/packages/moreno/maven/MapViewPager/images/download.svg) ](https://bintray.com/moreno/maven/MapViewPager/_latestVersion)
 # MapViewPager
 
+Android library that connects ViewPager fragments with Google Maps markers and makes them work together.
+
 ## Download
 
 #### Gradle
