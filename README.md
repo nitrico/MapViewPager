@@ -123,8 +123,8 @@ Check the examples on the [app directory](https://github.com/nitrico/MapViewPage
 
 I'm available to be hired, Contact me!
 
-|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
-|---|---|---|---|
+|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
+|---|---|---|---|---|
 
 
 ## License
