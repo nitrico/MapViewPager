@@ -41,7 +41,7 @@ dependencies {
 
 ## Usage
 
-> Don't forget to add the right **permissions** and your Google Maps **API key** to your `AndroidManifest.xml`
+> Don't forget to add the right **permissions** and your Google Maps **API key** to your `AndroidManifest.xml`.
 
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. 
