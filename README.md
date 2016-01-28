@@ -21,6 +21,23 @@ dependencies {
 
 ## Usage
 
+#### Include it in your layout
+
+```xml
+<com.github.nitrico.mapviewpager.MapViewPager
+        android:id="@+id/mapViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:viewPagerWeight="1"
+        app:mapWeight="1"
+        app:mapGravity="1"
+        app:mapOffset="56dp" />
+```
+
+#### Advanced usage
+
+If you want more personalization you can use the MapViewPager.Builder()
+
 Check the examples in the app folder!
 
 ## License
