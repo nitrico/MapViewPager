@@ -13,6 +13,7 @@ repositories {
         url  "http://dl.bintray.com/moreno/maven" 
     }
 }
+
 dependencies {
     compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
 }
