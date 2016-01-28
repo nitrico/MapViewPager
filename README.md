@@ -3,6 +3,7 @@
 
 Android library that connects ViewPager fragments with Google Maps markers and makes them work together.
 
+
 ## Download
 
 #### Gradle
@@ -18,6 +19,7 @@ dependencies {
     compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
 }
 ```
+
 
 ## Usage
 
@@ -39,6 +41,7 @@ dependencies {
 If you want more personalization you can use the MapViewPager.Builder()
 
 Check the examples in the app folder!
+
 
 ## License
 ```
