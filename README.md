@@ -54,18 +54,40 @@ and call `mapViewPager.start(this, adapter, callback /*optional*/);` passing the
 
 ##### XML attributes
 
-|Attribute|Format|Default value|Description
+|Attribute|Format|Default|Description
 |---|---|---|---|
-|viewPagerWeight|integer|1||
-|mapWeight|integer|1||
-|mapGravity|integer|1||
+|viewPagerWeight|integer|1|Weight of the viewpager in the layout|
+|mapWeight|integer|1|Weight of the map in the layout|
+|mapGravity|integer (0..3)|1|0 = left, 1 = top, 2 = right, 3 = bottom|
 |mapOffset|dimension|0dp||
-|mapPaddingLeft|dimension|0dp||
-|mapPaddingTop|dimension|0dp||
-|mapPaddingRight|dimension|0dp||
-|mapPaddingBottom|dimension|0dp||
-|markersAlpha|float (0..1)|0.4||
+|mapPaddingLeft|dimension|0dp|Left padding for the map|
+|mapPaddingTop|dimension|0dp|Top padding for the map|
+|mapPaddingRight|dimension|0dp|Right padding for the map|
+|mapPaddingBottom|dimension|0dp|Bottom padding for the map|
+|markersAlpha|float (0..1)|0.4|Opacity of markers when deactivated|
 
+###### MapViewPager public methods
+
+```java
+void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) 
+void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter, @Nullable Callback callback)
+void setCurrentItem(int currentItem)
+GoogleMap getMap()
+SupportMapFragment getMapFragment()
+ViewPager getViewPager() 
+CameraUpdate getDefaultPosition() 
+
+// Single getters (when adapter extends MapViewPager.Adapter)
+Marker getMarker(int position)
+List<Marker> getMarkers()
+
+// Multi getters (when adapter extends MapViewPager.MultiAdapter)
+Marker getMarker(int page, int position)
+List<Marker> getMarkers(int page) 
+List<List<Marker>> getAllMarkers()
+CameraUpdate getDefaultPosition(int page) 
+List<CameraUpdate> getDefaultPositions()
+```
 
 #### Advanced usage
 
