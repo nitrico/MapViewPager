@@ -93,15 +93,15 @@ List<CameraUpdate> getDefaultPositions()
 If you want more customization on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` and pass their instances to create the MapViewPager object using the Builder object. For example:
 
 ```java
-MapViewPager mvp = new MapViewPager.Builder(this)       // this is Context
-                .mapFragment(map)                       // map is SupportMapFragment
-                .viewPager(viewPager)                   // viewPager is ViewPager
-                .adapter(adapter)                       // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
-                .markersAlpha(alpha)                    // Optional.
-                .mapPadding(left, top, right, bottom)   // Optional.
-                .mapOffset(offset)                      // Optional.
-                .callback(callback)                     // Optional. callback is MapViewPager.Callback
-                .build();
+mvp = new MapViewPager.Builder(this)            // this is Context
+        .mapFragment(map)                       // map is SupportMapFragment
+        .viewPager(viewPager)                   // viewPager is ViewPager
+        .adapter(adapter)                       // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+        .markersAlpha(alpha)                    // Optional.
+        .mapPadding(left, top, right, bottom)   // Optional.
+        .mapOffset(offset)                      // Optional.
+        .callback(callback)                     // Optional. callback is MapViewPager.Callback
+        .build();
 ```
 
 Check the examples on the app directory.
