@@ -1,4 +1,5 @@
-[ ![Download](https://api.bintray.com/packages/moreno/maven/MapViewPager/images/download.svg) ](https://bintray.com/moreno/maven/MapViewPager/_latestVersion)
+[![Download](https://api.bintray.com/packages/moreno/maven/MapViewPager/images/download.svg)]
+(https://bintray.com/moreno/maven/MapViewPager/_latestVersion)
 
 # MapViewPager
 
@@ -7,6 +8,10 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 ![screenshot](http://i.imgur.com/tZ7wO4D.png) ![screenshot](http://i.imgur.com/mfbp5ps.png) ![screenshot](http://i.imgur.com/C4dVMU7.png)
 
 Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
+
+**Warning:**
+* Not fully tested yet but it works perfectly on my Nexus 5 running Marshmallow
+* It is my first Android lib. Tips, suggestions or any other comments are welcome
 
 
 ## Features
@@ -27,6 +32,8 @@ repositories {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
 }
 ```
@@ -52,7 +59,7 @@ Include the view in your xml layout
         app:mapGravity="1"
         app:mapOffset="56dp" />
 ```
-and call `mapViewPager.start(this, adapter, /*optional*/callback);` passing the AppCompatActivity (or FragmentActivity) and adapter instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
+find the view in your activity then and call `mapViewPager.start(this, adapter);` or `mapViewPager.start(this, adapter, callback);` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
 ##### XML attributes
 
