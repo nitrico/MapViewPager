@@ -33,10 +33,10 @@ dependencies {
 
 ##### For 1 (or 0) markers per fragment:
 
-Create a ViewPager adapter extending from `MapViewPager.Adapter` and override method
-`public CameraPosition getCameraPosition(int position)` returning the marker camera position for fragment each fragment.
+Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
+`public CameraPosition getCameraPosition(int position)` or `public List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment.
 
-You can create it like that `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
+You can create a CameraPosition it like that: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
 Include the view in your xml layout
 
@@ -66,7 +66,7 @@ and call `mapViewPager.start(this, adapter, callback /*optional*/);` passing the
 |mapPaddingBottom|dimension|0dp|Bottom padding for the map|
 |markersAlpha|float (0..1)|0.4|Opacity of markers when deactivated|
 
-###### MapViewPager public methods
+##### MapViewPager public methods
 
 ```java
 void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) 
