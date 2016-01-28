@@ -34,27 +34,11 @@ dependencies {
 ##### For 1 (or 0) markers per fragment:
 
 Create a ViewPager adapter extending from `MapViewPager.Adapter` and override method
-```java
-public CameraPosition getCameraPosition(int position)
-``` 
-returning the marker camera position for fragment each fragment.
+`public CameraPosition getCameraPosition(int position)` returning the marker camera position for fragment each fragment.
 
-You can create it like that 
-```
-CameraPosition.builder().target(new LatLng(latitude, longitud)).zoom(zoom).build()
-```
+You can create it like that `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
-*MapViewPager.Adapter extends from FragmentStatePagerAdapter so, like in any other ViewPager, you also need to override methods*
-```java
-public int getCount()
-public Fragment getItem(int position)
-```
-and probably want to override
-```java
-public CharSequence getPageTitle(int position)
-```
-
-Include it in your xml layout
+Include the view in your xml layout
 
 ```xml
 <com.github.nitrico.mapviewpager.MapViewPager
@@ -66,7 +50,21 @@ Include it in your xml layout
         app:mapGravity="1"
         app:mapOffset="56dp" />
 ```
+and call `mapViewPager.start(this, adapter, callback /*optional*/);` passing the AppCompatActivity (or FragmentActivity) and adapter instances. You can also pass a MapViewPager.Callback instance to get notified when the GoogleMap object is created and working.
 
+##### XML attributes
+
+|Attribute|Format|Default value|Description
+|---|---|---|---|
+|viewPagerWeight|integer|1||
+|mapWeight|integer|1||
+|mapGravity|integer|1||
+|mapOffset|dimension|0dp||
+|mapPaddingLeft|dimension|0dp||
+|mapPaddingTop|dimension|0dp||
+|mapPaddingRight|dimension|0dp||
+|mapPaddingBottom|dimension|0dp||
+|markersAlpha|float (0..1)|0.4||
 
 
 #### Advanced usage
