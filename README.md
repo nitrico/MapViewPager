@@ -33,7 +33,8 @@ dependencies {
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `public CameraPosition getCameraPosition(int position)` or `public List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment.
 
-You can create a CameraPosition it like that: `CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
+To create a CameraPosition: 
+`CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();`
 
 Include the view in your xml layout
 
@@ -68,7 +69,8 @@ and call `mapViewPager.start(this, adapter, /*optional*/callback);` passing the 
 ```java
 void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) 
 void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter, @Nullable Callback callback)
-void setCurrentItem(int currentItem)
+
+// General getters
 GoogleMap getMap()
 SupportMapFragment getMapFragment()
 ViewPager getViewPager() 
@@ -86,9 +88,29 @@ CameraUpdate getDefaultPosition(int page)
 List<CameraUpdate> getDefaultPositions()
 ```
 
-#### Advanced usage
+#### Advanced
 
-Check the examples in the app folder!
+If you want more customization on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` and pass their instances to create the MapViewPager object using the Builder object. For example:
+
+```java
+MapViewPager mvp = new MapViewPager.Builder(this)       // this is Context
+                .mapFragment(map)                       // map is SupportMapFragment
+                .viewPager(viewPager)                   // viewPager is ViewPager
+                .adapter(adapter)                       // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+                .markersAlpha(alpha)                    // Optional.
+                .mapPadding(left, top, right, bottom)   // Optional.
+                .mapOffset(offset)                      // Optional.
+                .callback(callback)                     // Optional. callback is MapViewPager.Callback
+                .build();
+```
+
+Check the examples on the app directory.
+
+## Author
+
+##### Miguel Ángel Moreno
+
+I'm available to be hired, Contact me!
 
 
 ## License
