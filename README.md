@@ -22,7 +22,7 @@ Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/
 
 ## Download
 
-#### Gradle
+##### Gradle
 
 ```gradle
 repositories {
