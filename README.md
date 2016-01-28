@@ -108,10 +108,11 @@ Check the examples on the app directory.
 
 ## Author
 
-##### Miguel Ángel Moreno   [Facebook](https://www.facebook.com/miguelangelmoreno) [Twitter](https://twitter.com/nitrico/)
+##### Miguel Ángel Moreno
 
 I'm available to be hired, Contact me!
 
+**[Email](mailto:nitrico@gmail.com) [Facebook](https://www.facebook.com/miguelangelmoreno) [Twitter](https://twitter.com/nitrico/)**
 
 ## License
 ```
