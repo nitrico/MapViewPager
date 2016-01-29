@@ -61,6 +61,27 @@ Include the view in your xml layout
 
 Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
 
+##### Builder
+
+If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
+
+```java
+MapViewPager mvp = new MapViewPager.Builder(this)   // this is Context
+        .mapFragment(map)                           // map is SupportMapFragment
+        .viewPager(viewPager)                       // viewPager is ViewPager
+        .adapter(adapter)                           // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+        .callback(callback)                         // Optional callback is MapViewPager.Callback
+        .markersAlpha(alpha)                        // Optional
+        .mapPadding(left, top, right, bottom)       // Optional
+        .mapOffset(offset)                          // Optional
+        .build();
+```
+
+Check the examples on the [sample folder](https://github.com/nitrico/mapviewpager/tree/master/sample).
+
+
+## Documentation
+
 #### XML attributes
 
 |Attribute|Format|Default|Description
@@ -77,7 +98,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 #### Public methods
 
-###### MapViewPager
+**MapViewPager**
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
@@ -101,40 +122,21 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
-###### to override in MapViewPager.Adapter
+**to override in MapViewPager.Adapter**
 ```java
 CameraPosition getCameraPosition(int position)
 CharSequence getPageTitle(int position)
 ```
-###### to overrided in MapViewPager.MultiAdapter
+** to override in MapViewPager.MultiAdapter**
 ```java
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
 String getMarkerTitle(int page, int position)
 ```
-###### MapViewPager.Callback
+**to override in MapViewPager.Callback**
 ```java
 onMapViewPagerReady();
 ```
-
-
-#### Builder
-
-If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
-
-```java
-MapViewPager mvp = new MapViewPager.Builder(this)   // this is Context
-        .mapFragment(map)                           // map is SupportMapFragment
-        .viewPager(viewPager)                       // viewPager is ViewPager
-        .adapter(adapter)                           // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
-        .callback(callback)                         // Optional callback is MapViewPager.Callback
-        .markersAlpha(alpha)                        // Optional
-        .mapPadding(left, top, right, bottom)       // Optional
-        .mapOffset(offset)                          // Optional
-        .build();
-```
-
-Check the examples on the [sample folder](https://github.com/nitrico/mapviewpager/tree/master/sample).
 
 
 ## Author
