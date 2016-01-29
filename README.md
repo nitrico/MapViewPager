@@ -78,8 +78,11 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 #### Public methods
 
 ```java
-void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter) 
-void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter, MapViewPager.Callback callback)
+void start(FragmentActivity activity, 
+           MapViewPager.AbsAdapter mapAdapter) 
+void start(FragmentActivity activity, 
+           MapViewPager.AbsAdapter mapAdapter, 
+           MapViewPager.Callback callback)
 
 // getters
 GoogleMap getMap()
