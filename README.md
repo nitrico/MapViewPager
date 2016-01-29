@@ -1,5 +1,4 @@
-[![Download](https://api.bintray.com/packages/moreno/maven/MapViewPager/images/download.svg)]
-(https://bintray.com/moreno/maven/MapViewPager/_latestVersion)
+[![Download](https://api.bintray.com/packages/moreno/maven/mapviewpager/images/download.svg) ](https://bintray.com/moreno/maven/mapviewpager/_latestVersion)
 
 # MapViewPager
 
