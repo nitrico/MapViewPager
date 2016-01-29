@@ -138,7 +138,7 @@ String getMarkerTitle(int page, int position)
 
 To override in **MapViewPager.Callback** instances
 ```java
-onMapViewPagerReady()
+void onMapViewPagerReady()
 ```
 
 
