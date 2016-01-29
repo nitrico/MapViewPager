@@ -1,1 +1,1 @@
-include ':app', ':mapviewpager'
+include ':sample', ':mapviewpager'
