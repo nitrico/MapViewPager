@@ -96,8 +96,7 @@ Check the examples on the [sample folder](https://github.com/nitrico/mapviewpage
 |mapPaddingBottom|dimension|`0dp`|Bottom map padding|
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
-
-Public methods in **MapViewPager**:
+##### Public methods
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
@@ -122,20 +121,20 @@ CameraUpdate getDefaultPosition(int page)
 List<CameraUpdate> getDefaultPositions()
 ```
 
-To override in **MapViewPager.Adapter** instances:
+To override in **MapViewPager.Adapter** instances
 ```java
 CameraPosition getCameraPosition(int position)
 CharSequence getPageTitle(int position)
 ```
 
-To override in **MapViewPager.MultiAdapter** instances:
+To override in **MapViewPager.MultiAdapter** instances
 ```java
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
 String getMarkerTitle(int page, int position)
 ```
 
-To override in **MapViewPager.Callback** instances:
+To override in **MapViewPager.Callback** instances
 ```java
 onMapViewPagerReady()
 ```
