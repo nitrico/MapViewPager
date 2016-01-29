@@ -11,7 +11,7 @@ Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/
 #### Notice
 * **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
 * Only `android.support.v4.app.Fragment` and `SupportMapFragment` supported right now.
-* It is my first Android lib. Tips, suggestions, features requests and any other comments are welcome.
+* It is my first Android lib. Tips, suggestions and requests are all welcome.
 
 
 ## Features
