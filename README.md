@@ -79,30 +79,31 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 ###### MapViewPager
 
-|MapViewPager|
-|---|
+```java
+void start(FragmentActivity activity, 
+           MapViewPager.AbsAdapter mapAdapter) 
+void start(FragmentActivity activity, 
+           MapViewPager.AbsAdapter mapAdapter, 
+           MapViewPager.Callback callback)
 
-|Return type|Method name|Arguments|
-|---|---|---|
-|`void`|`start`|`FragmentActivity, MapViewPager.AbsAdapter`|
-|`void`|`start`|`FragmentActivity, MapViewPager.AbsAdapter, MapViewPager.Callback`|
-|`GoogleMap`|`getMap`||
-|`SupportMapFragment`|`getMapFragment`||
-|`ViewPager`|`getViewPager`||
-|`CameraUpdate`|`getDefaultPosition`||
-|`List<List<Marker>>`|`getAllMarkers`||
-|`Marker`|`getMarker`|`int`|
-|`List<Marker>`|`getMarkers`||
-|`Marker`|`getMarker`|`int, int`|
-|`List<Marker>`|`getMarkers`|`int`|
-|`List<List<Marker>>`|`getAllMarkers`||
-|`CameraUpdate`|`getDefaultPosition`|`int`||
-|`List<CameraUpdate`|`getDefaultPositions`||
-
-###### MapViewPager.Callback
-|Return type|Method name|Arguments|
-|---|---|---|
-|`void`|`onMapViewPagerReady`||
+GoogleMap getMap()
+SupportMapFragment getMapFragment()
+ViewPager getViewPager() 
+CameraUpdate getDefaultPosition()
+```
+when adapter extends MapViewPager.Adapter
+```java
+Marker getMarker(int position)
+List<Marker> getMarkers()
+```
+hen adapter extends MapViewPager.MultiAdapter
+```java
+Marker getMarker(int page, int position)
+List<Marker> getMarkers(int page) 
+List<List<Marker>> getAllMarkers()
+CameraUpdate getDefaultPosition(int page) 
+List<CameraUpdate> getDefaultPositions()
+```
 
 
 #### Builder
