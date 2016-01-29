@@ -34,7 +34,7 @@ repositories {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
-    compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
+    compile 'com.github.nitrico.mapviewpager:mapviewpager:1.0.0'
 }
 ```
 
@@ -66,15 +66,15 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
-|**viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
-|**mapWeight**|integer|`1`|Weight of the map in the layout|
-|**mapGravity**|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|**mapOffset**|dimension|`0dp`|Map *padding* when displaing multiple markers on the map|
-|**mapPaddingLeft**|dimension|`0dp`|Left map padding|
-|**mapPaddingTop**|dimension|`0dp`|Top map padding|
-|**mapPaddingRight**|dimension|`0dp`|Right map padding|
-|**mapPaddingBottom**|dimension|`0dp`|Bottom map padding|
-|**markersAlpha**|float (0..1)|`0.4`|Opacity of markers when deactivated|
+|viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
+|mapWeight|integer|`1`|Weight of the map in the layout|
+|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
+|mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
+|mapPaddingLeft|dimension|`0dp`|Left map padding|
+|mapPaddingTop|dimension|`0dp`|Top map padding|
+|mapPaddingRight|dimension|`0dp`|Right map padding|
+|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
+|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
 #### Public methods
 
@@ -82,17 +82,17 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter) 
 void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter, MapViewPager.Callback callback)
 
-// General getters
+// getters
 GoogleMap getMap()
 SupportMapFragment getMapFragment()
 ViewPager getViewPager() 
 CameraUpdate getDefaultPosition() 
 
-// Single getters (when adapter extends MapViewPager.Adapter)
+// when adapter extends MapViewPager.Adapter
 Marker getMarker(int position)
 List<Marker> getMarkers()
 
-// Multi getters (when adapter extends MapViewPager.MultiAdapter)
+// when adapter extends MapViewPager.MultiAdapter
 Marker getMarker(int page, int position)
 List<Marker> getMarkers(int page) 
 List<List<Marker>> getAllMarkers()
@@ -102,17 +102,17 @@ List<CameraUpdate> getDefaultPositions()
 
 #### Builder
 
-If you want more customization on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` and pass their instances to create the MapViewPager object using the **MapViewPager.Builder** class. For example:
+If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
 
 ```java
-mvp = new MapViewPager.Builder(this)            // this is Context
-        .mapFragment(map)                       // map is SupportMapFragment
-        .viewPager(viewPager)                   // viewPager is ViewPager
-        .adapter(adapter)                       // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
-        .callback(callback)                     // Optional callback is MapViewPager.Callback
-        .markersAlpha(alpha)                    // Optional
-        .mapPadding(left, top, right, bottom)   // Optional
-        .mapOffset(offset)                      // Optional
+MapViewPager mvp = new MapViewPager.Builder(this)   // this is Context
+        .mapFragment(map)                           // map is SupportMapFragment
+        .viewPager(viewPager)                       // viewPager is ViewPager
+        .adapter(adapter)                           // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+        .callback(callback)                         // Optional callback is MapViewPager.Callback
+        .markersAlpha(alpha)                        // Optional
+        .mapPadding(left, top, right, bottom)       // Optional
+        .mapOffset(offset)                          // Optional
         .build();
 ```
 
