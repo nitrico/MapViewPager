@@ -61,19 +61,19 @@ Include the view in your xml layout
 
 Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
 
-##### Builder
+#### Builder
 
 If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
 
 ```java
-MapViewPager mvp = new MapViewPager.Builder(this)   // this is Context
-        .mapFragment(map)                           // map is SupportMapFragment
-        .viewPager(viewPager)                       // viewPager is ViewPager
-        .adapter(adapter)                           // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
-        .callback(callback)                         // Optional callback is MapViewPager.Callback
-        .markersAlpha(alpha)                        // Optional
-        .mapPadding(left, top, right, bottom)       // Optional
-        .mapOffset(offset)                          // Optional
+MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
+        .mapFragment(map)                         // map is SupportMapFragment
+        .viewPager(viewPager)                     // viewPager is ViewPager
+        .adapter(adapter)                         // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+        .callback(callback)                       // Optional callback is MapViewPager.Callback
+        .markersAlpha(alpha)                      // Optional
+        .mapPadding(left, top, right, bottom)     // Optional
+        .mapOffset(offset)                        // Optional
         .build();
 ```
 
@@ -122,18 +122,18 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
-**to override in MapViewPager.Adapter**
+To override in **MapViewPager.Adapter** instances
 ```java
 CameraPosition getCameraPosition(int position)
 CharSequence getPageTitle(int position)
 ```
-** to override in MapViewPager.MultiAdapter**
+To override in **MapViewPager.MultiAdapter** instances
 ```java
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
 String getMarkerTitle(int page, int position)
 ```
-**to override in MapViewPager.Callback**
+To override in **MapViewPager.Callback** instances
 ```java
 onMapViewPagerReady();
 ```
