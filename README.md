@@ -82,6 +82,21 @@ Check the examples on the [sample folder](https://github.com/nitrico/mapviewpage
 
 ## Documentation
 
+##### XML attributes
+
+|Attribute|Format|Default|Description
+|---|---|---|---|
+|viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
+|mapWeight|integer|`1`|Weight of the map in the layout|
+|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
+|mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
+|mapPaddingLeft|dimension|`0dp`|Left map padding|
+|mapPaddingTop|dimension|`0dp`|Top map padding|
+|mapPaddingRight|dimension|`0dp`|Right map padding|
+|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
+|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
+
+
 Public methods in **MapViewPager**:
 ```java
 void start(FragmentActivity activity, 
@@ -124,20 +139,6 @@ To override in **MapViewPager.Callback** instances:
 ```java
 onMapViewPagerReady()
 ```
-
-#### XML attributes
-
-|Attribute|Format|Default|Description
-|---|---|---|---|
-|viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
-|mapWeight|integer|`1`|Weight of the map in the layout|
-|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
-|mapPaddingLeft|dimension|`0dp`|Left map padding|
-|mapPaddingTop|dimension|`0dp`|Top map padding|
-|mapPaddingRight|dimension|`0dp`|Right map padding|
-|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
-|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
 
 ## Author
