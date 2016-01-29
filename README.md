@@ -86,6 +86,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 #### XML attributes
 
 They are all optional.
+
 |Attribute|Format|Default|Description|
 |---|---|---|---|
 |viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
