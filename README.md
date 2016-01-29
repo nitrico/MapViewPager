@@ -77,15 +77,16 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 #### Public methods
 
-|class|return|name|parameters|
-|---|---|---|---|
-|MapViewPager|void|start|FragmentActivity, MapViewPager.AbsAdapter
-|MapViewPager|void|start|FragmentActivity, MapViewPager.AbsAdapter, MapViewPager.Callback
-|MapViewPager|GoogleMap|getMap||
-|MapViewPager|SupportMapFragment|getMapFragment||
-|MapViewPager|ViewPager|getViewPager||
-|MapViewPager|CameraUpdate|getDefaultPosition||
-|MultiAdapter|List<List<Marker>>|getAllMarkers||
+##### MapViewPager
+|return|name|parameters|
+|---|---|---|
+|void|`start`|`FragmentActivity, MapViewPager.AbsAdapter`|
+|void|`start`|FragmentActivity, MapViewPager.AbsAdapter, MapViewPager.Callback|
+|`GoogleMap`|`getMap`||
+|SupportMapFragment|getMapFragment||
+|ViewPager|getViewPager||
+|CameraUpdate|getDefaultPosition||
+|List<List<Marker>>|getAllMarkers||
 
 ```java
 void start(FragmentActivity activity, 
