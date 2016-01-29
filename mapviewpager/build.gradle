@@ -5,7 +5,7 @@ ext {
     libraryVersion = '1.0.0'
     libraryDescription = 'Android library that connects ViewPager fragments with Google Maps markers and makes them work together.'
 
-    mavenGroupId = 'com.github.nitrico'
+    mavenGroupId = 'com.github.nitrico.mapviewpager'
     artifact = 'mapviewpager'
 
     siteUrl = 'https://github.com/nitrico/MapViewPager'
