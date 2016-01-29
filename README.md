@@ -8,16 +8,16 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 
 Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
 
-#### Notice:
-* **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
-* Only `android.support.v4.app.Fragment` and `SupportMapFragment` supported right now.
-* It is my first Android lib. Tips, suggestions, features requests and any other comments are welcome.
-
 
 ## Features
 
 * Supports any amount of markers per fragment.
 * Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated.
+
+##### Notice
+* **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
+* Only `android.support.v4.app.Fragment` and `SupportMapFragment` supported right now.
+* It is my first Android lib. Tips, suggestions, features requests and any other comments are welcome.
 
 
 ## Download
