@@ -34,7 +34,7 @@ repositories {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
-    compile 'com.github.nitrico.mapviewpager:mapviewpager:0.0.1'
+    compile 'com.github.nitrico.mapviewpager:mapviewpager:1.0.0'
 }
 ```
 
@@ -69,7 +69,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 |**viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
 |**mapWeight**|integer|`1`|Weight of the map in the layout|
 |**mapGravity**|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|**mapOffset**|dimension|`0dp`|Map *padding* when displaing multiple markers on the map|
+|**mapOffset**|dimension|`56dp`|Map *padding* for multiple markers on the map|
 |**mapPaddingLeft**|dimension|`0dp`|Left map padding|
 |**mapPaddingTop**|dimension|`0dp`|Top map padding|
 |**mapPaddingRight**|dimension|`0dp`|Right map padding|
