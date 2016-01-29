@@ -1,21 +1,18 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'MapViewPager'
-
-    publishedGroupId = 'com.github.nitrico'
     libraryName = 'MapViewPager'
-    artifact = 'mapviewpager'
-
+    libraryVersion = '1.0.0'
     libraryDescription = 'Android library that connects ViewPager fragments with Google Maps markers and makes them work together.'
+
+    mavenGroupId = 'com.github.nitrico'
+    artifact = 'mapviewpager'
 
     siteUrl = 'https://github.com/nitrico/MapViewPager'
     gitUrl = 'https://github.com/nitrico/MapViewPager.git'
 
-    libraryVersion = '0.0.1'
+    bintrayRepo = 'maven'
+    bintrayName = libraryName
 
     developerId = 'moreno'
     developerName = 'Miguel Ángel Moreno'
@@ -29,14 +26,12 @@ ext {
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-    group = 'com.github.nitrico.mapviewpager' // Change this to match your package name
-    version = '0.0.1' // Change this to match your version number
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "0.0.1"
+        versionName libraryVersion
     }
     buildTypes {
         release {
@@ -52,4 +47,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:8.4.0'
 }
 
+apply from: 'install.gradle'
 apply from: 'bintray.gradle'

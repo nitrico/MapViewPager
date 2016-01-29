@@ -51,7 +51,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         void onMapViewPagerReady();
     }
 
-    private static abstract class AbsAdapter extends FragmentStatePagerAdapter {
+    public static abstract class AbsAdapter extends FragmentStatePagerAdapter {
         public AbsAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -72,33 +72,29 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         public abstract String getMarkerTitle(int page, int position);
     }
 
-    private static final float DEFAULT_ALPHA = 0.4f;
-    private static final int DEFAULT_OFFSET = 0;
 
+    private static final float DEFAULT_ALPHA = 0.4f;
     private float markersAlpha = DEFAULT_ALPHA;
-    private int mapOffset = DEFAULT_OFFSET;
     private int mapGravity = 1;
     private int mapWeight = 1, pagerWeight = 1;
-    private int mapPaddingLeft = 0, mapPaddingTop = 0, mapPaddingRight = 0, mapPaddingBottom = 0;
+    private int mapPaddingLeft, mapPaddingTop, mapPaddingRight, mapPaddingBottom;
+    private int mapOffset;
 
-    private ViewPager viewPager;
-    private SupportMapFragment mapFragment;
-    private GoogleMap map;
     private Callback callback;
-
-    private CameraUpdate defaultPosition;
-    private List<CameraUpdate> defaultPositions;
-
-    private List<Marker> markers;
-    private List<List<Marker>> allMarkers;
-
+    private GoogleMap map;
+    private SupportMapFragment mapFragment;
+    private ViewPager viewPager;
     private AbsAdapter adapter;
-    private boolean multi = false;
+
+    protected CameraUpdate defaultPosition;
+    private List<CameraUpdate> defaultPositions;
+    protected List<Marker> markers;
+    private List<List<Marker>> allMarkers;
     private boolean hidden = false;
 
+
     public MapViewPager(Context context) {
-        super(context);
-        // not calling initialize(context) to use it with Builder
+        super(context); // not calling initialize(context) to use it with Builder
     }
 
     public MapViewPager(Context context, AttributeSet attrs) {
@@ -112,6 +108,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
     }
 
     private void initialize(Context context, AttributeSet attrs) {
+        mapOffset = dp(56);
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MapViewPager, 0, 0);
             try {
@@ -119,7 +116,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
                 pagerWeight = a.getInteger(R.styleable.MapViewPager_viewPagerWeight, 1);
                 mapWeight = a.getInteger(R.styleable.MapViewPager_mapWeight, 1);
                 mapGravity = a.getInteger(R.styleable.MapViewPager_mapGravity, 1);
-                mapOffset = a.getDimensionPixelSize(R.styleable.MapViewPager_mapOffset, DEFAULT_OFFSET);
+                mapOffset = a.getDimensionPixelSize(R.styleable.MapViewPager_mapOffset, mapOffset);
                 mapPaddingLeft = a.getDimensionPixelSize(R.styleable.MapViewPager_mapPaddingLeft, 0);
                 mapPaddingTop = a.getDimensionPixelSize(R.styleable.MapViewPager_mapPaddingTop, 0);
                 mapPaddingRight = a.getDimensionPixelSize(R.styleable.MapViewPager_mapPaddingRight, 0);
@@ -130,24 +127,21 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         }
         LayoutInflater inflater = LayoutInflater.from(context);
         switch (mapGravity) {
-            case 0: inflater.inflate(R.layout.mapviewpager_left, this); break;
-            case 1: inflater.inflate(R.layout.mapviewpager_top, this); break;
-            case 2: inflater.inflate(R.layout.mapviewpager_right, this); break;
+            case 0: inflater.inflate(R.layout.mapviewpager_left,   this); break;
+            case 1: inflater.inflate(R.layout.mapviewpager_top,    this); break;
+            case 2: inflater.inflate(R.layout.mapviewpager_right,  this); break;
             case 3: inflater.inflate(R.layout.mapviewpager_bottom, this); break;
         }
     }
 
-    public void start(@NonNull FragmentActivity activity,
-                      @NonNull AbsAdapter mapAdapter) {
+    public void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) {
         start(activity, mapAdapter, null);
     }
 
-    public void start(@NonNull FragmentActivity activity,
-                      @NonNull AbsAdapter mapAdapter,
+    public void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter,
                       @Nullable Callback callback) {
         this.callback = callback;
         adapter = mapAdapter;
-        if (adapter instanceof MultiAdapter) multi = true;
         mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.map);
         viewPager = (ViewPager) findViewById(R.id.pager);
         setWeights();
@@ -171,45 +165,174 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         moveTo(viewPager.getCurrentItem(), true);
     }
 
-    private void moveTo(int index, boolean animate) {
-        if (multi) multiMoveTo(index, animate);
-        else singleMoveTo((Adapter) adapter, index, animate);
+
+    private void populate() {
+        if (adapter instanceof MultiAdapter) populateMulti((MultiAdapter) adapter);
+        else populateSingle((Adapter) adapter);
     }
 
-    private void multiMoveTo(int index, boolean animate) {
-        CameraUpdate cu = defaultPositions.get(index);
-        if (cu == null) cu = defaultPosition;
-
-        if (animate) map.animateCamera(cu);
-        else map.moveCamera(cu);
-
-        hideInfoWindow();
-        if (allMarkers.get(index).size() == 1) allMarkers.get(index).get(0).showInfoWindow();
-        showMarkersForPage(index);
-    }
-
-    private void singleMoveTo(Adapter adapter, int index, boolean animate) {
-        CameraPosition camPos = adapter.getCameraPosition(index);
-        double lat = 0.0;
-        double lng = 0.0;
-
-        if (camPos != null) {
-            lat = adapter.getCameraPosition(index).target.latitude;
-            lng = adapter.getCameraPosition(index).target.longitude;
+    private void populateSingle(Adapter adapter) {
+        map.clear();
+        markers = new LinkedList<>();
+        for (int i = 0; i < adapter.getCount(); i++) {
+            CameraPosition cp = adapter.getCameraPosition(i);
+            if (cp != null) {
+                MarkerOptions mo = createMarkerOptions(cp, adapter.getPageTitle(i).toString());
+                markers.add(map.addMarker(mo));
+            }
+            else markers.add(null);
         }
+        map.setOnMarkerClickListener(createMarkerClickListenerSingle(adapter));
+        initDefaultPosition();
+    }
 
+    private void populateMulti(final MultiAdapter adapter) {
+        map.clear();
+        allMarkers = new LinkedList<>();
+        for (int page = 0; page < adapter.getCount(); page++) {
+            LinkedList<Marker> pageMarkers = new LinkedList<>();
+            if (adapter.getCameraPositions(page) != null) {
+                for (int i = 0; i < adapter.getCameraPositions(page).size(); i++) {
+                    CameraPosition cp = adapter.getCameraPositions(page).get(i);
+                    if (cp != null) {
+                        MarkerOptions mo = createMarkerOptions(cp, adapter.getMarkerTitle(page, i));
+                        pageMarkers.add(map.addMarker(mo));
+                    }
+                    else pageMarkers.add(null);
+                }
+            }
+            allMarkers.add(pageMarkers);
+        }
+        map.setOnMarkerClickListener(createMarkerClickListenerMulti(adapter));
+        initDefaultPositions(adapter);
+    }
+
+    private void moveTo(int page, boolean animate) {
+        if (adapter instanceof MultiAdapter) moveToMulti(page, animate);
+        else moveToSingle((Adapter) adapter, page, animate);
+    }
+
+    private void moveToSingle(Adapter adapter, int index, boolean animate) {
+        CameraPosition cp = adapter.getCameraPosition(index);
         CameraUpdate cu;
-        if (camPos != null && lat != 0.0 && lng != 0.0) {
+        if (cp != null && cp.target != null
+                && cp.target.latitude != 0.0
+                && cp.target.longitude != 0.0) {
+            cu = CameraUpdateFactory.newCameraPosition(cp);
             if (hidden) showMarkers();
-            cu = CameraUpdateFactory.newCameraPosition(camPos);
-            markers.get(index).showInfoWindow();
+            if (markers.get(index) != null) markers.get(index).showInfoWindow();
         }
         else {
             cu = defaultPosition;
-            hideInfoWindow();
+            hideInfoWindowSingle();
         }
         if (animate) map.animateCamera(cu);
         else map.moveCamera(cu);
+    }
+
+    private void moveToMulti(int page, boolean animate) {
+        CameraUpdate cu = defaultPositions.get(page);
+        if (cu == null) cu = defaultPosition;
+        if (animate) map.animateCamera(cu);
+        else map.moveCamera(cu);
+        hideInfoWindowMulti();
+        if (allMarkers.get(page) != null
+                && allMarkers.get(page).size() == 1
+                && allMarkers.get(page).get(0) != null)  { // this page has only one marker
+            allMarkers.get(page).get(0).showInfoWindow();
+        }
+        showMarkersForPage(page);
+    }
+
+    private void initDefaultPosition() {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markers) if (marker != null) builder.include(marker.getPosition());
+        LatLngBounds bounds = builder.build();
+        defaultPosition = CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
+    }
+
+    private void initDefaultPositions(final MultiAdapter adapter) {
+        // each page
+        defaultPositions = new LinkedList<>();
+        for (int i = 0; i < adapter.getCount() ; i++) {
+            defaultPositions.add(getDefaultPagePosition(adapter, i));
+        }
+        // global
+        LinkedList<Marker> all = new LinkedList<>();
+        for (List<Marker> list : allMarkers) if (list != null) all.addAll(list);
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : all) if (marker != null) builder.include(marker.getPosition());
+        LatLngBounds bounds = builder.build();
+        defaultPosition = CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
+    }
+
+    private CameraUpdate getDefaultPagePosition(final MultiAdapter adapter, int page) {
+        if (allMarkers.get(page).size() == 0)
+            return null;
+        if (allMarkers.get(page).size() == 1)
+            return CameraUpdateFactory.newCameraPosition(adapter.getCameraPositions(page).get(0));
+        // more than 1 marker on this page
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : allMarkers.get(page)) if (marker != null) builder.include(marker.getPosition());
+        LatLngBounds bounds = builder.build();
+        return CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
+    }
+
+    private GoogleMap.OnMarkerClickListener createMarkerClickListenerSingle(final Adapter adapter) {
+        return new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    CameraPosition cp = adapter.getCameraPosition(i);
+                    if (cp != null && cp.target != null
+                            && cp.target.latitude == marker.getPosition().latitude
+                            && cp.target.longitude == marker.getPosition().longitude) {
+                        viewPager.setCurrentItem(i);
+                        marker.showInfoWindow();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+    }
+
+    private GoogleMap.OnMarkerClickListener createMarkerClickListenerMulti(final MultiAdapter adapter) {
+        return new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for (int page = 0; page < adapter.getCount(); page++) {
+                    if (adapter.getCameraPositions(page) != null) {
+                        for (int i = 0; i < adapter.getCameraPositions(page).size(); i++) {
+                            CameraPosition cp = adapter.getCameraPositions(page).get(i);
+                            if (cp != null && cp.target != null
+                                    && cp.target.latitude == marker.getPosition().latitude
+                                    && cp.target.longitude == marker.getPosition().longitude) {
+                                if (marker.isInfoWindowShown()) { // THIS DOESN'T SEEM TO WORK !
+                                    viewPager.setCurrentItem(page);
+                                    return true;
+                                }
+                                else {
+                                    viewPager.setCurrentItem(page);
+                                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+                                    marker.showInfoWindow();
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+        };
+    }
+
+    private MarkerOptions createMarkerOptions(CameraPosition cp, String title) {
+        if (cp == null || cp.target == null) return null;
+        return new MarkerOptions()
+                .position(new LatLng(cp.target.latitude, cp.target.longitude))
+                .title(title)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
     }
 
     private void showMarkers() {
@@ -229,12 +352,17 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         }
     }
 
-    private void hideInfoWindow() {
-        if (multi) multiHideInfoWindow();
-        else singleHideInfoWindow();
+    private void hideInfoWindowMulti() {
+        for (List<Marker> list : allMarkers) {
+            if (list != null) {
+                for (Marker marker : list) {
+                    if (marker != null) marker.hideInfoWindow();
+                }
+            }
+        }
     }
 
-    private void singleHideInfoWindow() {
+    private void hideInfoWindowSingle() {
         hidden = true;
         for (Marker marker : markers) {
             if (marker != null) {
@@ -244,158 +372,12 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         }
     }
 
-    private void multiHideInfoWindow() {
-        for (List<Marker> list : allMarkers) {
-            for (Marker marker : list) {
-                if (marker != null) marker.hideInfoWindow();
-            }
-        }
-    }
-
-    private GoogleMap.OnMarkerClickListener createMarkerClickListener() {
-        if (multi) return createMultiMarkerClickListener((MultiAdapter) adapter);
-        else return createSingleMarkerClickListener((Adapter) adapter);
-    }
-
-    private GoogleMap.OnMarkerClickListener createSingleMarkerClickListener(final Adapter adapter) {
-        return new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                for (int i = 0; i < adapter.getCount(); i++) {
-                    CameraPosition cp = adapter.getCameraPosition(i);
-                    if (cp != null
-                            && cp.target.latitude == marker.getPosition().latitude
-                            && cp.target.longitude == marker.getPosition().longitude) {
-                        viewPager.setCurrentItem(i);
-                        marker.showInfoWindow();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
-    }
-
-    private GoogleMap.OnMarkerClickListener createMultiMarkerClickListener(final MultiAdapter adapter) {
-        return new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                for (int page = 0; page < adapter.getCount(); page++) {
-                    if (adapter.getCameraPositions(page) != null) {
-                        for (int i = 0; i < adapter.getCameraPositions(page).size(); i++) {
-                            CameraPosition cp = adapter.getCameraPositions(page).get(i);
-                            if (cp != null
-                                    && cp.target.latitude == marker.getPosition().latitude
-                                    && cp.target.longitude == marker.getPosition().longitude) {
-                                if (marker.isInfoWindowShown()) { // ESTO PARECE QUE NO VA
-                                    viewPager.setCurrentItem(page);
-                                    return true;
-                                }
-                                else {
-                                    viewPager.setCurrentItem(page);
-                                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
-                                    marker.showInfoWindow();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-                return false;
-            }
-        };
-    }
-
-    private void populate() {
-        if (multi) {
-            populate((MultiAdapter) adapter);
-            initDefaultPositions();
-        }
-        else {
-            populate((Adapter) adapter);
-            initDefaultPosition();
-        }
-    }
-
-    private void populate(final Adapter adapter) {
-        map.clear();
-        markers = new LinkedList<>();
-        for (int i = 0; i < adapter.getCount(); i++) {
-            CameraPosition cp = adapter.getCameraPosition(i);
-            if (cp != null) {
-                MarkerOptions mo = createMarkerOptions(cp, adapter.getPageTitle(i).toString());
-                markers.add(map.addMarker(mo));
-            }
-            else markers.add(null);
-        }
-        map.setOnMarkerClickListener(createSingleMarkerClickListener(adapter));
-    }
-
-    private void populate(final MultiAdapter adapter) {
-        map.clear();
-        allMarkers = new LinkedList<>();
-        for (int page = 0; page < adapter.getCount(); page++) {
-            LinkedList<Marker> pageMarkers = new LinkedList<>();
-            if (adapter.getCameraPositions(page) != null) {
-                for (int i = 0; i < adapter.getCameraPositions(page).size(); i++) {
-                    CameraPosition cp = adapter.getCameraPositions(page).get(i);
-                    if (cp != null) {
-                        MarkerOptions mo = createMarkerOptions(cp, adapter.getMarkerTitle(page, i));
-                        pageMarkers.add(map.addMarker(mo));
-                    }
-                    else pageMarkers.add(null);
-                }
-            }
-            allMarkers.add(pageMarkers);
-        }
-        map.setOnMarkerClickListener(createMultiMarkerClickListener(adapter));
-    }
-
-    private MarkerOptions createMarkerOptions(CameraPosition cp, String title) {
-        return new MarkerOptions()
-                .position(new LatLng(cp.target.latitude, cp.target.longitude))
-                .title(title)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-    }
-
-    private void initDefaultPosition() {
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Marker marker : markers) if (marker != null) builder.include(marker.getPosition());
-        LatLngBounds bounds = builder.build();
-        defaultPosition = CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
-    }
-
-    private void initDefaultPositions() {
-        // each page
-        defaultPositions = new LinkedList<>();
-        for (int i = 0; i<adapter.getCount(); i++) {
-            defaultPositions.add(getDefaultPagePosition((MultiAdapter) adapter, i));
-        }
-        // global
-        LinkedList<Marker> all = new LinkedList<>();
-        for (List<Marker> list : allMarkers) all.addAll(list);
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Marker marker : all) if (marker != null) builder.include(marker.getPosition());
-        LatLngBounds bounds = builder.build();
-        defaultPosition = CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
-    }
-
-    private CameraUpdate getDefaultPagePosition(MultiAdapter adapter, int page) {
-        if (allMarkers.get(page).size() == 0)
-            return null;
-        if (allMarkers.get(page).size() == 1)
-            return CameraUpdateFactory.newCameraPosition(adapter.getCameraPositions(page).get(0));
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Marker marker : allMarkers.get(page)) if (marker != null) builder.include(marker.getPosition());
-        LatLngBounds bounds = builder.build();
-        return CameraUpdateFactory.newLatLngBounds(bounds, mapOffset);
-    }
-
     private void setWeights() {
+        // viewPager
         LinearLayout.LayoutParams pagerParams = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, mapWeight);
         viewPager.setLayoutParams(pagerParams);
-
+        // mapFragment
         View mapView = mapFragment.getView();
         if (mapView != null) {
             LinearLayout.LayoutParams mapParams = new LinearLayout.LayoutParams(
@@ -404,8 +386,14 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         }
     }
 
+    private int dp(int dp) {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
+    }
 
-    // GENERAL GETTERS
+
+
+    // general getters
 
     public GoogleMap getMap() {
         return map;
@@ -419,16 +407,12 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         return viewPager;
     }
 
-    public void setCurrentItem(int currentItem) {
-        viewPager.setCurrentItem(currentItem);
-    }
-
     public CameraUpdate getDefaultPosition() {
         return defaultPosition;
     }
 
 
-    // SINGLE GETTERS
+    // single getters
 
     public Marker getMarker(int position) {
         return markers.get(position);
@@ -439,10 +423,11 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
     }
 
 
-    // MULTI GETTERS
+    // multi getters
 
     public Marker getMarker(int page, int position) {
-        return allMarkers.get(page).get(position);
+        if (allMarkers.get(page) != null) return allMarkers.get(page).get(position);
+        return null;
     }
 
     public List<Marker> getMarkers(int page) {
@@ -463,7 +448,28 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
 
 
 
-    // BUILDER
+    // Builder
+
+    private MapViewPager(Builder builder, Context context) {
+        super(context);
+        // check that requited fields are provided
+        if (context == null) throw new IllegalArgumentException("context can't be null");
+        if (builder.mapFragment == null) throw new IllegalArgumentException("mapFragment can't be null");
+        if (builder.viewPager == null) throw new IllegalArgumentException("viewPager can't be null");
+        if (builder.adapter == null) throw new IllegalArgumentException("adapter can't be null");
+        mapFragment = builder.mapFragment;
+        viewPager = builder.viewPager;
+        adapter = builder.adapter;
+        callback = builder.callback;
+        markersAlpha = builder.markersAlpha;
+        mapPaddingLeft = builder.mapPaddingLeft;
+        mapPaddingTop = builder.mapPaddingTop;
+        mapPaddingRight = builder.mapPaddingRight;
+        mapPaddingBottom = builder.mapPaddingBottom;
+        mapOffset = dp(56);
+        mapOffset = builder.mapOffset;
+        mapFragment.getMapAsync(this);
+    }
 
     public static class Builder {
 
@@ -473,39 +479,39 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         private AbsAdapter adapter;
         private Callback callback;
         private float markersAlpha = DEFAULT_ALPHA;
-        private int mapOffset = DEFAULT_OFFSET;
+        private int mapOffset;
         private int mapPaddingLeft, mapPaddingTop, mapPaddingRight, mapPaddingBottom;
 
-        public Builder(Context context) {
+        public Builder(@NonNull Context context) {
             this.context = context;
         }
 
-        public Builder(Context context,
-                       SupportMapFragment mapFragment,
-                       ViewPager viewPager,
-                       AbsAdapter adapter) {
+        public Builder(@NonNull Context context,
+                       @NonNull SupportMapFragment mapFragment,
+                       @NonNull ViewPager viewPager,
+                       @NonNull AbsAdapter adapter) {
             this.context = context;
             this.mapFragment = mapFragment;
             this.viewPager = viewPager;
             this.adapter = adapter;
         }
 
-        public Builder mapFragment(SupportMapFragment mapFragment) {
+        public Builder mapFragment(@NonNull SupportMapFragment mapFragment) {
             this.mapFragment = mapFragment;
             return this;
         }
 
-        public Builder viewPager(ViewPager viewPager) {
+        public Builder viewPager(@NonNull ViewPager viewPager) {
             this.viewPager = viewPager;
             return this;
         }
 
-        public Builder adapter(AbsAdapter adapter) {
+        public Builder adapter(@NonNull AbsAdapter adapter) {
             this.adapter = adapter;
             return this;
         }
 
-        public Builder callback(Callback callback) {
+        public Builder callback(@Nullable Callback callback) {
             this.callback = callback;
             return this;
         }
@@ -535,31 +541,6 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
             return new MapViewPager(this, context);
         }
 
-    }
-
-    private MapViewPager(Builder builder, Context context) {
-        super(context);
-        mapFragment = builder.mapFragment;
-        viewPager = builder.viewPager;
-        adapter = builder.adapter;
-        callback = builder.callback;
-        markersAlpha = builder.markersAlpha;
-        mapOffset = builder.mapOffset;
-        mapPaddingLeft = builder.mapPaddingLeft;
-        mapPaddingTop = builder.mapPaddingTop;
-        mapPaddingRight = builder.mapPaddingRight;
-        mapPaddingBottom = builder.mapPaddingBottom;
-        // check that required fields are provided! (mapFragment, viewPager & adapter)
-
-        // start
-        if (adapter instanceof MultiAdapter) multi = true;
-        mapFragment.getMapAsync(this);
-    }
-
-
-    private static int dp(Context context, int dp) {
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm);
     }
 
 }
