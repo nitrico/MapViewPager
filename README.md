@@ -78,6 +78,8 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 #### Public methods
 
 ###### MapViewPager
+
+###### MapViewPager
 |Return type|Method name|Arguments|
 |---|---|---|
 |`void`|`start`|`FragmentActivity, MapViewPager.AbsAdapter`|
@@ -87,16 +89,8 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 |`ViewPager`|`getViewPager`||
 |`CameraUpdate`|`getDefaultPosition`||
 |`List<List<Marker>>`|`getAllMarkers`||
-
-###### MapViewPager.Adapter
-|Return type|Method name|Arguments|
-|---|---|---|
 |`Marker`|`getMarker`|`int`|
-|`List<Marker>`|`getMarkers`|``|
-
-###### MapViewPager.MultiAdapter
-|Return type|Method name|Arguments|
-|---|---|---|
+|`List<Marker>`|`getMarkers`||
 |`Marker`|`getMarker`|`int, int`|
 |`List<Marker>`|`getMarkers`|`int`|
 |`List<List<Marker>>`|`getAllMarkers`||
