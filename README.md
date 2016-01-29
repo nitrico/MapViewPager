@@ -60,7 +60,7 @@ Include the view in your xml layout
         app:mapOffset="56dp" />
 ```
 
-Find the view in your activity then and call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
+Find the view in your activity and then call `mapViewPager.start(this, adapter)` or `mapViewPager.start(this, adapter, callback)` passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a **MapViewPager.Callback** instance to get notified when the GoogleMap object is created and working.
 
 #### Builder
 
@@ -123,18 +123,18 @@ List<CameraUpdate> getDefaultPositions()
 ```
 **Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them _after_ `onMapViewPagerReady()` method in the callback is called.
 
-To override extending **MapViewPager.Callback**
+To override in **MapViewPager.Callback** effective classes
 ```java
 void onMapViewPagerReady()
 ```
 
-To override extending **MapViewPager.Adapter**
+To override in **MapViewPager.Adapter** effective classes
 ```java
 CameraPosition getCameraPosition(int position)
 CharSequence getPageTitle(int position)
 ```
 
-To override extending **MapViewPager.MultiAdapter**
+To override in **MapViewPager.MultiAdapter** effective classes
 ```java
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
