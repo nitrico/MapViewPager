@@ -41,7 +41,7 @@ dependencies {
 
 ## Usage
 
-> Don't forget to add the right **permissions** and your Google Maps **API key** to your `AndroidManifest.xml`.
+> Don't forget to add the right **permissions** and your Google Maps **API key** to your `AndroidManifest.xml` file.
 
 Create a ViewPager adapter extending from **MapViewPager.Adapter** or **MapViewPager.MultiAdapter** and override method
 `CameraPosition getCameraPosition(int position)` or `List<CameraPosition> getCameraPositions(int position)` returning the markers camera position for each fragment. 
@@ -85,6 +85,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 
 #### XML attributes
 
+They are all optional.
 |Attribute|Format|Default|Description|
 |---|---|---|---|
 |viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
@@ -96,7 +97,6 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 |mapPaddingRight|dimension|`0dp`|Right map padding|
 |mapPaddingBottom|dimension|`0dp`|Bottom map padding|
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
-All of them are optional
 
 #### Public methods
 
@@ -120,7 +120,7 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
-**Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them after `onMapViewPagerReady()` method in the callback is invoked.
+**Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them _after_ `onMapViewPagerReady()` method in the callback is called.
 
 To override in **MapViewPager.Callback** instances
 ```java
