@@ -96,6 +96,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 |mapPaddingRight|dimension|`0dp`|Right map padding|
 |mapPaddingBottom|dimension|`0dp`|Bottom map padding|
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
+All of them are optional
 
 #### Public methods
 
@@ -119,6 +120,12 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
+**Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them after `onMapViewPagerReady()` method in the callback is invoked.
+
+To override in **MapViewPager.Callback** instances
+```java
+void onMapViewPagerReady()
+```
 
 To override in **MapViewPager.Adapter** instances
 ```java
@@ -131,11 +138,6 @@ To override in **MapViewPager.MultiAdapter** instances
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
 String getMarkerTitle(int page, int position)
-```
-
-To override in **MapViewPager.Callback** instances
-```java
-void onMapViewPagerReady()
 ```
 
 
