@@ -65,7 +65,7 @@
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
 <blockquote>
-<p>Don't forget to add the right <strong>permissions</strong> and your Google Maps <strong>API key</strong> to your <code>AndroidManifest.xml</code>.</p>
+<p>Don't forget to add the right <strong>permissions</strong> and your Google Maps <strong>API key</strong> to your <code>AndroidManifest.xml</code> file.</p>
 </blockquote>
 
 <p>Create a ViewPager adapter extending from <strong>MapViewPager.Adapter</strong> or <strong>MapViewPager.MultiAdapter</strong> and override method
@@ -110,6 +110,8 @@
 
 <h4>
 <a id="xml-attributes" class="anchor" href="#xml-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XML attributes</h4>
+
+<p>They are all optional.</p>
 
 <table>
 <thead>
@@ -200,20 +202,22 @@
 <span class="pl-smi">CameraUpdate</span> getDefaultPosition(<span class="pl-k">int</span> page) 
 <span class="pl-k">List&lt;<span class="pl-smi">CameraUpdate</span>&gt;</span> getDefaultPositions()</pre></div>
 
-<p>To override in <strong>MapViewPager.Adapter</strong> instances</p>
+<p><strong>Notice:</strong> in order to avoid <code>NullPointerException</code>s when calling any of those getters before the actual GoogleMap object is created, you should use them <em>after</em> <code>onMapViewPagerReady()</code> method in the callback is called.</p>
+
+<p>To override extending <strong>MapViewPager.Callback</strong></p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> onMapViewPagerReady()</pre></div>
+
+<p>To override extending <strong>MapViewPager.Adapter</strong></p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">CameraPosition</span> getCameraPosition(<span class="pl-k">int</span> position)
 <span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)</pre></div>
 
-<p>To override in <strong>MapViewPager.MultiAdapter</strong> instances</p>
+<p>To override extending <strong>MapViewPager.MultiAdapter</strong></p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">List&lt;<span class="pl-smi">CameraPosition</span>&gt;</span> getCameraPositions(<span class="pl-k">int</span> page)
 <span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)
 <span class="pl-smi">String</span> getMarkerTitle(<span class="pl-k">int</span> page, <span class="pl-k">int</span> position)</pre></div>
-
-<p>To override in <strong>MapViewPager.Callback</strong> instances</p>
-
-<div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> onMapViewPagerReady()</pre></div>
 
 <h2>
 <a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h2>
