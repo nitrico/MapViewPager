@@ -101,21 +101,20 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
+###### to override in MapViewPager.Adapter
+```java
+CameraPosition getCameraPosition(int position)
+CharSequence getPageTitle(int position)
+```
+###### to overrided in MapViewPager.MultiAdapter
+```java
+List<CameraPosition> getCameraPositions(int page)
+CharSequence getPageTitle(int position)
+String getMarkerTitle(int page, int position)
+```
 ###### MapViewPager.Callback
 ```java
 onMapViewPagerReady();
-
-```
-###### to be overrided in MapViewPager.Adapter
-```java
-CameraPosition getCameraPosition(int position);
-
-```
-###### to be overrided in MapViewPager.MultiAdapter
-```java
-List<CameraPosition> getCameraPositions(int page);
-String getMarkerTitle(int page, int position);
-
 ```
 
 
