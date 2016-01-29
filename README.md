@@ -78,7 +78,6 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 #### Public methods
 
 ###### MapViewPager
-
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
@@ -90,19 +89,33 @@ GoogleMap getMap()
 SupportMapFragment getMapFragment()
 ViewPager getViewPager() 
 CameraUpdate getDefaultPosition()
-```
-when adapter extends MapViewPager.Adapter
-```java
+
+// when adapter extends MapViewPager.Adapter
 Marker getMarker(int position)
 List<Marker> getMarkers()
-```
-hen adapter extends MapViewPager.MultiAdapter
-```java
+
+// when adapter extends MapViewPager.MultiAdapter
 Marker getMarker(int page, int position)
 List<Marker> getMarkers(int page) 
 List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
+```
+###### MapViewPager.Callback
+```java
+onMapViewPagerReady();
+
+```
+###### to be overrided in MapViewPager.Adapter
+```java
+CameraPosition getCameraPosition(int position);
+
+```
+###### to be overrided in MapViewPager.MultiAdapter
+```java
+List<CameraPosition> getCameraPositions(int page);
+String getMarkerTitle(int page, int position);
+
 ```
 
 
