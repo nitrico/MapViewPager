@@ -123,18 +123,18 @@ List<CameraUpdate> getDefaultPositions()
 ```
 **Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them _after_ `onMapViewPagerReady()` method in the callback is called.
 
-To override in **MapViewPager.Callback** instances
+To override extending **MapViewPager.Callback**
 ```java
 void onMapViewPagerReady()
 ```
 
-To override in **MapViewPager.Adapter** instances
+To override extending **MapViewPager.Adapter**
 ```java
 CameraPosition getCameraPosition(int position)
 CharSequence getPageTitle(int position)
 ```
 
-To override in **MapViewPager.MultiAdapter** instances
+To override extending **MapViewPager.MultiAdapter**
 ```java
 List<CameraPosition> getCameraPositions(int page)
 CharSequence getPageTitle(int position)
