@@ -81,6 +81,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 |MapViewPager|
 |---|
+
 |Return type|Method name|Arguments|
 |---|---|---|
 |`void`|`start`|`FragmentActivity, MapViewPager.AbsAdapter`|
