@@ -86,7 +86,7 @@
         <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">mapGravity</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
         <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">mapOffset</span>=<span class="pl-s"><span class="pl-pds">"</span>56dp<span class="pl-pds">"</span></span> /&gt;</pre></div>
 
-<p>Find the view in your activity then and call <code>mapViewPager.start(this, adapter)</code> or <code>mapViewPager.start(this, adapter, callback)</code> passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a <strong>MapViewPager.Callback</strong> instance to get notified when the GoogleMap object is created and working.</p>
+<p>Find the view in your activity and then call <code>mapViewPager.start(this, adapter)</code> or <code>mapViewPager.start(this, adapter, callback)</code> passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a <strong>MapViewPager.Callback</strong> instance to get notified when the GoogleMap object is created and working.</p>
 
 <h4>
 <a id="builder" class="anchor" href="#builder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Builder</h4>
@@ -202,18 +202,18 @@
 <span class="pl-smi">CameraUpdate</span> getDefaultPosition(<span class="pl-k">int</span> page) 
 <span class="pl-k">List&lt;<span class="pl-smi">CameraUpdate</span>&gt;</span> getDefaultPositions()</pre></div>
 
-<p><strong>Notice:</strong> in order to avoid <code>NullPointerException</code>s when calling any of those getters before the actual GoogleMap object is created, you should use them <em>after</em> <code>onMapViewPagerReady()</code> method in the callback is called.</p>
+<p><strong>Warning!</strong> In order to avoid <code>NullPointerException</code>s when calling any of those getters before the actual GoogleMap object is created, you should use them <em>only after</em> <code>onMapViewPagerReady()</code> method in the callback is called.</p>
 
-<p>To override extending <strong>MapViewPager.Callback</strong></p>
+<p>To override in <strong>MapViewPager.Callback</strong> effective classes</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> onMapViewPagerReady()</pre></div>
 
-<p>To override extending <strong>MapViewPager.Adapter</strong></p>
+<p>To override in <strong>MapViewPager.Adapter</strong> effective classes</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">CameraPosition</span> getCameraPosition(<span class="pl-k">int</span> position)
 <span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)</pre></div>
 
-<p>To override extending <strong>MapViewPager.MultiAdapter</strong></p>
+<p>To override in <strong>MapViewPager.MultiAdapter</strong> effective classes</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">List&lt;<span class="pl-smi">CameraPosition</span>&gt;</span> getCameraPositions(<span class="pl-k">int</span> page)
 <span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)
