@@ -115,7 +115,7 @@ MapViewPager mvp = new MapViewPager.Builder(this)   // this is Context
         .build();
 ```
 
-Check the examples on the [app directory](https://github.com/nitrico/MapViewPager/tree/master/app).
+Check the examples on the [sample folder](https://github.com/nitrico/mapviewpager/tree/master/sample).
 
 
 ## Author
