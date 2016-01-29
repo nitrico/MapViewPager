@@ -77,6 +77,14 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 #### Public methods
 
+|class|return|name|parameters|
+|---|---|---|---|
+|MapViewPager|void|start|FragmentActivity
+MapViewPager.AbsAdapter
+|MapViewPager|void|start|FragmentActivity
+MapViewPager.AbsAdapter
+MapViewPager.Callback
+
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
