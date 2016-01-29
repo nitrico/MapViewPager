@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>MapViewPager by nitrico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">MapViewPager</h1>
+      <h2 class="project-tagline">Android library that connects ViewPager fragments with Google Maps markers and makes them work together.</h2>
+      <a href="https://github.com/nitrico/mapviewpager" class="btn">View on GitHub</a>
+      <a href="https://github.com/nitrico/mapviewpager/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nitrico/mapviewpager/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><img src="http://i.imgur.com/tZ7wO4D.png" alt="screenshot"> <img src="http://i.imgur.com/mfbp5ps.png" alt="screenshot"> <img src="http://i.imgur.com/C4dVMU7.png" alt="screenshot"></p>
+
+<p>Check out the <strong><a href="https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk">sample apk</a></strong> !</p>
+
+<p><strong>Notice:</strong></p>
+
+<ul>
+<li>Not fully tested yet but it works perfectly on my Nexus 5 running Marshmallow.</li>
+<li>It is my first Android lib. Tips, suggestions or any other comments are welcome.</li>
+</ul>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>[x] Supports any amount of markers per fragment.</li>
+<li>[x] Default camera position (for fragments with 0 or <em>more than 1</em> markers) automatically calculated.</li>
+</ul>
+
+<h2>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h2>
+
+<h5>
+<a id="gradle" class="anchor" href="#gradle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Gradle</h5>
+
+<div class="highlight highlight-source-groovy-gradle"><pre><span class="pl-en">repositories</span> {
+    maven {
+        url  <span class="pl-s"><span class="pl-pds">"</span>http://dl.bintray.com/moreno/maven<span class="pl-pds">"</span></span> 
+    }
+}
+
+<span class="pl-en">dependencies</span> {
+    compile <span class="pl-s"><span class="pl-pds">'</span>com.android.support:appcompat-v7:23.1.1<span class="pl-pds">'</span></span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>com.google.android.gms:play-services-maps:8.4.0<span class="pl-pds">'</span></span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>com.github.nitrico.mapviewpager:mapviewpager:1.0.0<span class="pl-pds">'</span></span>
+}</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<blockquote>
+<p>Don't forget to add the right <strong>permissions</strong> and your Google Maps <strong>API key</strong> to your <code>AndroidManifest.xml</code>.</p>
+</blockquote>
+
+<p>Create a ViewPager adapter extending from <strong>MapViewPager.Adapter</strong> or <strong>MapViewPager.MultiAdapter</strong> and override method
+<code>CameraPosition getCameraPosition(int position)</code> or <code>List&lt;CameraPosition&gt; getCameraPositions(int position)</code> returning the markers camera position for each fragment. </p>
+
+<blockquote>
+<p>To create a CameraPosition: <code>CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();</code></p>
+</blockquote>
+
+<p>Include the view in your xml layout</p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">com</span>.github.nitrico.mapviewpager.MapViewPager
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/mapViewPager<span class="pl-pds">"</span></span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+        <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+        <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">viewPagerWeight</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
+        <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">mapWeight</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
+        <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">mapGravity</span>=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
+        <span class="pl-e">app</span><span class="pl-e">:</span><span class="pl-e">mapOffset</span>=<span class="pl-s"><span class="pl-pds">"</span>56dp<span class="pl-pds">"</span></span> /&gt;</pre></div>
+
+<p>Find the view in your activity then and call <code>mapViewPager.start(this, adapter)</code> or <code>mapViewPager.start(this, adapter, callback)</code> passing the AppCompatActivity (or FragmentActivity) and MapViewPager.Adapter (or MapViewPager.MultiAdapter) instances. You can also pass a <strong>MapViewPager.Callback</strong> instance to get notified when the GoogleMap object is created and working.</p>
+
+<h4>
+<a id="xml-attributes" class="anchor" href="#xml-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XML attributes</h4>
+
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Format</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>viewPagerWeight**</td>
+<td>integer</td>
+<td><code>1</code></td>
+<td>Weight of the viewpager in the layout</td>
+</tr>
+<tr>
+<td>mapWeight</td>
+<td>integer</td>
+<td><code>1</code></td>
+<td>Weight of the map in the layout</td>
+</tr>
+<tr>
+<td>mapGravity</td>
+<td>integer (0..3)</td>
+<td><code>1</code></td>
+<td>Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom</td>
+</tr>
+<tr>
+<td>mapOffset</td>
+<td>dimension</td>
+<td><code>56dp</code></td>
+<td>Map <em>padding</em> for multiple markers on the map</td>
+</tr>
+<tr>
+<td>mapPaddingLeft</td>
+<td>dimension</td>
+<td><code>0dp</code></td>
+<td>Left map padding</td>
+</tr>
+<tr>
+<td>mapPaddingTop</td>
+<td>dimension</td>
+<td><code>0dp</code></td>
+<td>Top map padding</td>
+</tr>
+<tr>
+<td>mapPaddingRight</td>
+<td>dimension</td>
+<td><code>0dp</code></td>
+<td>Right map padding</td>
+</tr>
+<tr>
+<td>mapPaddingBottom</td>
+<td>dimension</td>
+<td><code>0dp</code></td>
+<td>Bottom map padding</td>
+</tr>
+<tr>
+<td>markersAlpha</td>
+<td>float (0..1)</td>
+<td><code>0.4</code></td>
+<td>Opacity of markers when deactivated</td>
+</tr>
+</tbody>
+</table>
+
+<h4>
+<a id="public-methods" class="anchor" href="#public-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public methods</h4>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> start(<span class="pl-smi">FragmentActivity</span> activity, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter) 
+<span class="pl-k">void</span> start(<span class="pl-smi">FragmentActivity</span> activity, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">Callback</span> callback)
+
+<span class="pl-c">// getters</span>
+<span class="pl-smi">GoogleMap</span> getMap()
+<span class="pl-smi">SupportMapFragment</span> getMapFragment()
+<span class="pl-smi">ViewPager</span> getViewPager() 
+<span class="pl-smi">CameraUpdate</span> getDefaultPosition() 
+
+<span class="pl-c">// when adapter extends MapViewPager.Adapter</span>
+<span class="pl-smi">Marker</span> getMarker(<span class="pl-k">int</span> position)
+<span class="pl-k">List&lt;<span class="pl-smi">Marker</span>&gt;</span> getMarkers()
+
+<span class="pl-c">// when adapter extends MapViewPager.MultiAdapter</span>
+<span class="pl-smi">Marker</span> getMarker(<span class="pl-k">int</span> page, <span class="pl-k">int</span> position)
+<span class="pl-k">List&lt;<span class="pl-smi">Marker</span>&gt;</span> getMarkers(<span class="pl-k">int</span> page) 
+<span class="pl-k">List&lt;<span class="pl-k">List&lt;<span class="pl-smi">Marker</span>&gt;</span>&gt;</span> getAllMarkers()
+<span class="pl-smi">CameraUpdate</span> getDefaultPosition(<span class="pl-k">int</span> page) 
+<span class="pl-k">List&lt;<span class="pl-smi">CameraUpdate</span>&gt;</span> getDefaultPositions()</pre></div>
+
+<h4>
+<a id="builder" class="anchor" href="#builder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Builder</h4>
+
+<p>If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a <code>&lt;android.support.v4.view.ViewPager&gt;</code> and a <code>&lt;fragment class="com.google.android.gms.maps.SupportMapFragment"&gt;</code> to your activity layout and then and pass them to create the MapViewPager object using the <strong>MapViewPager.Builder</strong> class:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">MapViewPager</span> mvp <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MapViewPager</span>.<span class="pl-smi">Builder</span>(<span class="pl-v">this</span>)   <span class="pl-c">// this is Context</span>
+        .mapFragment(map)                           <span class="pl-c">// map is SupportMapFragment</span>
+        .viewPager(viewPager)                       <span class="pl-c">// viewPager is ViewPager</span>
+        .adapter(adapter)                           <span class="pl-c">// adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter</span>
+        .callback(callback)                         <span class="pl-c">// Optional callback is MapViewPager.Callback</span>
+        .markersAlpha(alpha)                        <span class="pl-c">// Optional</span>
+        .mapPadding(left, top, right, bottom)       <span class="pl-c">// Optional</span>
+        .mapOffset(offset)                          <span class="pl-c">// Optional</span>
+        .build();</pre></div>
+
+<p>Check the examples on the <a href="https://github.com/nitrico/MapViewPager/tree/master/app">app directory</a>.</p>
+
+<h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h2>
+
+<h5>
+<a id="miguel-Ángel-moreno" class="anchor" href="#miguel-%C3%81ngel-moreno" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Miguel Ángel Moreno</h5>
+
+<p>I'm available to be hired, Contact me!</p>
+
+<table>
+<thead>
+<tr>
+<th><a href="mailto:nitrico@gmail.com">Email</a></th>
+<th><a href="https://www.facebook.com/miguelangelmoreno">Facebook</a></th>
+<th><a href="https://plus.google.com/+Miguel%C3%81ngelMorenoS">Google+</a></th>
+<th><a href="https://www.linkedin.com/in/morenomiguelangel">Linked.in</a></th>
+<th><a href="https://twitter.com/nitrico/">Twitter</a></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<pre><code>Copyright 2016 Miguel Ángel Moreno
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nitrico/mapviewpager">MapViewPager</a> is maintained by <a href="https://github.com/nitrico">nitrico</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
