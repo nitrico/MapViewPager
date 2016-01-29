@@ -8,9 +8,10 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 
 Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
 
-**Notice:**
-* Not fully tested yet but it works perfectly on my Nexus 5 running Marshmallow.
-* It is my first Android lib. Tips, suggestions or any other comments are welcome.
+#### Notice:
+* **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
+* Only `android.support.v4.app.Fragment` and `SupportMapFragment` supported right now.
+* It is my first Android lib. Tips, suggestions, features requests and any other comments are welcome.
 
 
 ## Features
@@ -63,7 +64,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 #### Builder
 
-If you want more control on how to display the map and the ViewPager, for example to overlay one on the other, you can freely add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
+If you want more control on how to display the map and the ViewPager, for example to overlap each other, you can add a `<android.support.v4.view.ViewPager>` and a `<fragment class="com.google.android.gms.maps.SupportMapFragment">` to your activity layout and then and pass them to create the MapViewPager object using the **MapViewPager.Builder** class:
 
 ```java
 MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
@@ -84,7 +85,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 
 #### XML attributes
 
-|Attribute|Format|Default|Description
+|Attribute|Format|Default|Description|
 |---|---|---|---|
 |viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
 |mapWeight|integer|`1`|Weight of the map in the layout|
@@ -97,6 +98,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
 #### Public methods
+
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
