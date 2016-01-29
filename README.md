@@ -96,9 +96,7 @@ Check the examples on the [sample folder](https://github.com/nitrico/mapviewpage
 |mapPaddingBottom|dimension|`0dp`|Bottom map padding|
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
-#### Public methods
-
-**MapViewPager**
+#### Public methods in **MapViewPager**
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
@@ -135,7 +133,7 @@ String getMarkerTitle(int page, int position)
 ```
 To override in **MapViewPager.Callback** instances
 ```java
-onMapViewPagerReady();
+onMapViewPagerReady()
 ```
 
 
