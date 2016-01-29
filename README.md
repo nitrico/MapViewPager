@@ -100,11 +100,8 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 #### Public methods
 
 ```java
-void start(FragmentActivity activity, 
-           MapViewPager.AbsAdapter mapAdapter) 
-void start(FragmentActivity activity, 
-           MapViewPager.AbsAdapter mapAdapter, 
-           MapViewPager.Callback callback)
+void start(FragmentActivity activity, MapViewPager.AbsAdapter adapter) 
+void start(FragmentActivity activity, MapViewPager.AbsAdapter adapter, MapViewPager.Callback callback)
 
 GoogleMap getMap()
 SupportMapFragment getMapFragment()
