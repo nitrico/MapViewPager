@@ -121,7 +121,7 @@ List<List<Marker>> getAllMarkers()
 CameraUpdate getDefaultPosition(int page) 
 List<CameraUpdate> getDefaultPositions()
 ```
-**Notice:** in order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them _after_ `onMapViewPagerReady()` method in the callback is called.
+**Warning!** In order to avoid `NullPointerException`s when calling any of those getters before the actual GoogleMap object is created, you should use them _only after_ `onMapViewPagerReady()` method in the callback is called.
 
 To override in **MapViewPager.Callback** effective classes
 ```java
