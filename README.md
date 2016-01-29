@@ -21,7 +21,7 @@ Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/
 
 ## Download
 
-##### Gradle
+#### Gradle
 
 ```gradle
 repositories {
@@ -82,7 +82,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 
 ## Documentation
 
-##### XML attributes
+#### XML attributes
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
@@ -96,7 +96,7 @@ Check the examples in the [sample folder](https://github.com/nitrico/mapviewpage
 |mapPaddingBottom|dimension|`0dp`|Bottom map padding|
 |markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
-##### Public methods
+#### Public methods
 ```java
 void start(FragmentActivity activity, 
            MapViewPager.AbsAdapter mapAdapter) 
