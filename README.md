@@ -15,8 +15,8 @@ Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/
 
 ## Features
 
-- [x] Supports any amount of markers per fragment.
-- [x] Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated.
+* Supports any amount of markers per fragment.
+* Default camera position (for fragments with 0 or *more than 1* markers) automatically calculated.
 
 
 ## Download
@@ -65,7 +65,7 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
-|viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
+|viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
 |mapWeight|integer|`1`|Weight of the map in the layout|
 |mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
 |mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
