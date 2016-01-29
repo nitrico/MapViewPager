@@ -66,15 +66,15 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 
 |Attribute|Format|Default|Description
 |---|---|---|---|
-|**viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
-|**mapWeight**|integer|`1`|Weight of the map in the layout|
-|**mapGravity**|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|**mapOffset**|dimension|`56dp`|Map *padding* for multiple markers on the map|
-|**mapPaddingLeft**|dimension|`0dp`|Left map padding|
-|**mapPaddingTop**|dimension|`0dp`|Top map padding|
-|**mapPaddingRight**|dimension|`0dp`|Right map padding|
-|**mapPaddingBottom**|dimension|`0dp`|Bottom map padding|
-|**markersAlpha**|float (0..1)|`0.4`|Opacity of markers when deactivated|
+|viewPagerWeight**|integer|`1`|Weight of the viewpager in the layout|
+|mapWeight|integer|`1`|Weight of the map in the layout|
+|mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
+|mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
+|mapPaddingLeft|dimension|`0dp`|Left map padding|
+|mapPaddingTop|dimension|`0dp`|Top map padding|
+|mapPaddingRight|dimension|`0dp`|Right map padding|
+|mapPaddingBottom|dimension|`0dp`|Bottom map padding|
+|markersAlpha|float (0..1)|`0.4`|Opacity of markers when deactivated|
 
 #### Public methods
 
@@ -82,17 +82,17 @@ Find the view in your activity then and call `mapViewPager.start(this, adapter)`
 void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter) 
 void start(FragmentActivity activity, MapViewPager.AbsAdapter mapAdapter, MapViewPager.Callback callback)
 
-// General getters
+// getters
 GoogleMap getMap()
 SupportMapFragment getMapFragment()
 ViewPager getViewPager() 
 CameraUpdate getDefaultPosition() 
 
-// Single getters (when adapter extends MapViewPager.Adapter)
+// when adapter extends MapViewPager.Adapter
 Marker getMarker(int position)
 List<Marker> getMarkers()
 
-// Multi getters (when adapter extends MapViewPager.MultiAdapter)
+// when adapter extends MapViewPager.MultiAdapter
 Marker getMarker(int page, int position)
 List<Marker> getMarkers(int page) 
 List<List<Marker>> getAllMarkers()
