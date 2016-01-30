@@ -72,7 +72,7 @@
 <code>CameraPosition getCameraPosition(int position)</code> or <code>List&lt;CameraPosition&gt; getCameraPositions(int position)</code> returning the markers camera position for each fragment. </p>
 
 <blockquote>
-<p>To create a CameraPosition: <code>CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(zoom).build();</code></p>
+<p>To create a CameraPosition: <code>CameraPosition.fromLatLngZoom(new LatLng(latitude, longitude), zoom);</code></p>
 </blockquote>
 
 <p>Include the view in your xml layout</p>
@@ -97,6 +97,7 @@
         .mapFragment(map)                         <span class="pl-c">// map is SupportMapFragment</span>
         .viewPager(viewPager)                     <span class="pl-c">// viewPager is ViewPager</span>
         .adapter(adapter)                         <span class="pl-c">// adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter</span>
+        .position(initialPosition)                <span class="pl-c">// Optional initialPosition is int     </span>
         .callback(callback)                       <span class="pl-c">// Optional callback is MapViewPager.Callback</span>
         .markersAlpha(alpha)                      <span class="pl-c">// Optional</span>
         .mapPadding(left, top, right, bottom)     <span class="pl-c">// Optional</span>
@@ -144,7 +145,7 @@
 <tr>
 <td>mapOffset</td>
 <td>dimension</td>
-<td><code>56dp</code></td>
+<td><code>32dp</code></td>
 <td>Map <em>padding</em> for multiple markers on the map</td>
 </tr>
 <tr>
@@ -183,8 +184,18 @@
 <h4>
 <a id="public-methods" class="anchor" href="#public-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public methods</h4>
 
-<div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> start(<span class="pl-smi">FragmentActivity</span> activity, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> adapter) 
-<span class="pl-k">void</span> start(<span class="pl-smi">FragmentActivity</span> activity, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> adapter, <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">Callback</span> callback)
+<div class="highlight highlight-source-java"><pre><span class="pl-k">void</span> start(@<span class="pl-smi">NonNull</span> <span class="pl-smi">FragmentActivity</span> activity,
+           @<span class="pl-smi">NonNull</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter)
+<span class="pl-k">void</span> start(@<span class="pl-smi">NonNull</span> <span class="pl-smi">FragmentActivity</span> activity,
+           @<span class="pl-smi">NonNull</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter,
+           @<span class="pl-smi">Nullable</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">Callback</span> callback)
+<span class="pl-k">void</span> start(@<span class="pl-smi">NonNull</span> <span class="pl-smi">FragmentActivity</span> activity,
+           @<span class="pl-smi">NonNull</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter,
+           <span class="pl-k">int</span> initialPosition) 
+<span class="pl-k">void</span> start(@<span class="pl-smi">NonNull</span> <span class="pl-smi">FragmentActivity</span> activity, 
+           @<span class="pl-smi">NonNull</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">AbsAdapter</span> mapAdapter,
+           <span class="pl-k">int</span> initialPosition,
+           @<span class="pl-smi">Nullable</span> <span class="pl-smi">MapViewPager</span><span class="pl-k">.</span><span class="pl-smi">Callback</span> callback)
 
 <span class="pl-smi">GoogleMap</span> getMap()
 <span class="pl-smi">SupportMapFragment</span> getMapFragment()
@@ -210,14 +221,18 @@
 
 <p>To override in <strong>MapViewPager.Adapter</strong> effective classes</p>
 
-<div class="highlight highlight-source-java"><pre><span class="pl-smi">CameraPosition</span> getCameraPosition(<span class="pl-k">int</span> position)
-<span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)</pre></div>
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">CameraPosition</span> getCameraPosition(<span class="pl-k">int</span> position)</pre></div>
 
 <p>To override in <strong>MapViewPager.MultiAdapter</strong> effective classes</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">List&lt;<span class="pl-smi">CameraPosition</span>&gt;</span> getCameraPositions(<span class="pl-k">int</span> page)
-<span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position)
 <span class="pl-smi">String</span> getMarkerTitle(<span class="pl-k">int</span> page, <span class="pl-k">int</span> position)</pre></div>
+
+<p>Both adapters extends from FragmentStatePagerAdapter, so you also need to override</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">CharSequence</span> getPageTitle(<span class="pl-k">int</span> position) <span class="pl-c">// this will be used as marker title in MapViewPager.Adapter</span>
+<span class="pl-smi">Fragment</span> getItem(<span class="pl-k">int</span> position)
+<span class="pl-k">int</span> getCount()</pre></div>
 
 <h2>
 <a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h2>
@@ -244,7 +259,7 @@
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
-<pre><code>Copyright 2016 Miguel Ángel Moreno
+<pre lang="txt"><code>Copyright 2016 Miguel Ángel Moreno
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
