@@ -151,7 +151,6 @@ To override in **MapViewPager.MultiAdapter** effective classes
 List<CameraPosition> getCameraPositions(int page)
 String getMarkerTitle(int page, int position)
 ```
-
 Both adapters extends from `FragmentStatePagerAdapter`, so you also need to override
 ```java
 CharSequence getPageTitle(int position) // this will be used as marker title in MapViewPager.Adapter
