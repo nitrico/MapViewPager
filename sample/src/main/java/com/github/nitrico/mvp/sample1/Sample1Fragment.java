@@ -11,7 +11,7 @@ import com.github.nitrico.mvp.R;
 public class Sample1Fragment extends android.support.v4.app.Fragment {
 
     private TextView title;
-    private int index = 0;
+    private int index;
 
     public Sample1Fragment() { }
 
@@ -30,16 +30,15 @@ public class Sample1Fragment extends android.support.v4.app.Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sample_1, container, false);
         title = (TextView) view.findViewById(R.id.title);
-
-        Bundle args = getArguments();
-        if (args != null) index = args.getInt("INDEX", 0);
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null) index = args.getInt("INDEX", 0);
+
         title.setText(Sample1Adapter.TITLES[index]);
     }
 

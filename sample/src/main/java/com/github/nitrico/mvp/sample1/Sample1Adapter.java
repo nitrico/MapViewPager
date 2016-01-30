@@ -8,17 +8,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Sample1Adapter extends MapViewPager.Adapter {
 
-    public static final String[] TITLES = { "Ninguno", "London", "Paris",
-            "Barcelona", "Milan", "No", "Brussels" };
+    public static final String[] TITLES = { "London", "Paris", "Barcelona", "Milan", "Brussels" };
 
     public static final CameraPosition[] POSITIONS = {
-            null,
-            CameraPosition.builder().target(new LatLng(51.5287352,-0.381784)).zoom(6f).build(),
-            CameraPosition.builder().target(new LatLng(48.859,2.2074722)).zoom(6f).build(),
-            CameraPosition.builder().target(new LatLng(41.3948976,2.0787274)).zoom(6f).build(),
-            CameraPosition.builder().target(new LatLng(45.4628329,9.107692)).zoom(6f).build(),
-            null,
-            CameraPosition.builder().target(new LatLng(50.8550625,4.3053499)).zoom(6f).build()
+            CameraPosition.fromLatLngZoom(new LatLng(51.5287352,-0.381784), 6f),
+            CameraPosition.fromLatLngZoom(new LatLng(48.859,2.2074722), 6f),
+            CameraPosition.fromLatLngZoom(new LatLng(41.3948976,2.0787274), 6f),
+            CameraPosition.fromLatLngZoom(new LatLng(45.4628329,9.107692), 6f),
+            CameraPosition.fromLatLngZoom(new LatLng(50.8550625,4.3053499), 6f)
     };
 
     public Sample1Adapter(FragmentManager fm) {

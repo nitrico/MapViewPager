@@ -1,39 +1,43 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@android:color/white" >
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="?android:attr/actionBarSize"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="?colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_close"
+        app:contentInsetStart="0dp"
+        app:titleMarginStart="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:paddingTop="8dp"
-            android:paddingLeft="48dp"
-            android:paddingRight="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            tools:ignore="RtlHardcoded" />
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:paddingLeft="48dp"
-            android:paddingRight="16dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="48dp"
+            android:paddingLeft="56dp"
+            android:paddingRight="24dp"
             android:lineSpacingExtra="3dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:text="@string/lorem_ipsum"
             tools:ignore="RtlHardcoded" />
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>

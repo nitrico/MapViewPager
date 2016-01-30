@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         app:viewPagerWeight="1"
         app:mapWeight="1"
-        app:mapGravity="1"
+        app:mapGravity="@integer/map_gravity"
         app:mapOffset="56dp" />
 
 </LinearLayout>

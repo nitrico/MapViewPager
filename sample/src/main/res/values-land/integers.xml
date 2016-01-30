@@ -1,0 +1,5 @@
+<resources>
+
+    <integer name="map_gravity">0</integer>
+
+</resources>

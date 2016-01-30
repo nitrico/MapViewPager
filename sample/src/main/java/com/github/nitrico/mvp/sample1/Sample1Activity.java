@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.github.nitrico.mapviewpager.MapViewPager;
 import com.github.nitrico.mvp.R;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 public class Sample1Activity extends AppCompatActivity implements MapViewPager.Callback {
 
@@ -23,10 +22,9 @@ public class Sample1Activity extends AppCompatActivity implements MapViewPager.C
 
     @Override
     public void onMapViewPagerReady() {
-        mapViewPager.getMarker(1)
+        /*mapViewPager.getMarker(1)
                 .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-
-        /*mapViewPager.getViewPager().addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+         mapViewPager.getViewPager().addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 for (int i=0; i<mapViewPager.getMarkers().size(); i++) {

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
             android:paddingLeft="48dp"
-            android:paddingRight="16dp"
+            android:paddingRight="24dp"
             android:lineSpacingExtra="3dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:text="@string/lorem_ipsum"

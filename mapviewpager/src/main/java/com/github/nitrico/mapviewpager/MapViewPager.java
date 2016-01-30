@@ -80,16 +80,18 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
     private int mapPaddingLeft, mapPaddingTop, mapPaddingRight, mapPaddingBottom;
     private int mapOffset;
 
-    private Callback callback;
     private GoogleMap map;
     private SupportMapFragment mapFragment;
     private ViewPager viewPager;
     private AbsAdapter adapter;
+    private Callback callback;
 
     protected CameraUpdate defaultPosition;
     private List<CameraUpdate> defaultPositions;
     protected List<Marker> markers;
     private List<List<Marker>> allMarkers;
+
+    private int initialPosition;
     private boolean hidden = false;
 
 
@@ -108,7 +110,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
     }
 
     private void initialize(Context context, AttributeSet attrs) {
-        mapOffset = dp(56);
+        mapOffset = dp(32);
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MapViewPager, 0, 0);
             try {
@@ -134,12 +136,28 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         }
     }
 
-    public void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter) {
-        start(activity, mapAdapter, null);
+    public void start(@NonNull FragmentActivity activity,
+                      @NonNull AbsAdapter mapAdapter) {
+        start(activity, mapAdapter, 0, null);
     }
 
-    public void start(@NonNull FragmentActivity activity, @NonNull AbsAdapter mapAdapter,
+    public void start(@NonNull FragmentActivity activity,
+                      @NonNull AbsAdapter mapAdapter,
                       @Nullable Callback callback) {
+        start(activity, mapAdapter, 0, callback);
+    }
+
+    public void start(@NonNull FragmentActivity activity,
+                      @NonNull AbsAdapter mapAdapter,
+                      int initialPosition) {
+        start(activity, mapAdapter, initialPosition, null);
+    }
+
+    public void start(@NonNull FragmentActivity activity,
+                      @NonNull AbsAdapter mapAdapter,
+                      int initialPosition,
+                      @Nullable Callback callback) {
+        this.initialPosition = initialPosition;
         this.callback = callback;
         adapter = mapAdapter;
         mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.map);
@@ -153,6 +171,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         map = googleMap;
         map.setPadding(mapPaddingLeft, mapPaddingTop, mapPaddingRight, mapPaddingBottom);
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(initialPosition);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -308,7 +327,7 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
                             if (cp != null && cp.target != null
                                     && cp.target.latitude == marker.getPosition().latitude
                                     && cp.target.longitude == marker.getPosition().longitude) {
-                                if (marker.isInfoWindowShown()) { // THIS DOESN'T SEEM TO WORK !
+                                if (marker.isInfoWindowShown()) { // this doesn't seem to work !!
                                     viewPager.setCurrentItem(page);
                                     return true;
                                 }
@@ -461,13 +480,13 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         viewPager = builder.viewPager;
         adapter = builder.adapter;
         callback = builder.callback;
+        initialPosition = builder.position;
         markersAlpha = builder.markersAlpha;
         mapPaddingLeft = builder.mapPaddingLeft;
         mapPaddingTop = builder.mapPaddingTop;
         mapPaddingRight = builder.mapPaddingRight;
         mapPaddingBottom = builder.mapPaddingBottom;
-        mapOffset = dp(56);
-        mapOffset = builder.mapOffset;
+        mapOffset = builder.mapOffset != 0 ? builder.mapOffset : dp(32);
         mapFragment.getMapAsync(this);
     }
 
@@ -478,22 +497,13 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
         private ViewPager viewPager;
         private AbsAdapter adapter;
         private Callback callback;
+        private int position;
         private float markersAlpha = DEFAULT_ALPHA;
         private int mapOffset;
         private int mapPaddingLeft, mapPaddingTop, mapPaddingRight, mapPaddingBottom;
 
         public Builder(@NonNull Context context) {
             this.context = context;
-        }
-
-        public Builder(@NonNull Context context,
-                       @NonNull SupportMapFragment mapFragment,
-                       @NonNull ViewPager viewPager,
-                       @NonNull AbsAdapter adapter) {
-            this.context = context;
-            this.mapFragment = mapFragment;
-            this.viewPager = viewPager;
-            this.adapter = adapter;
         }
 
         public Builder mapFragment(@NonNull SupportMapFragment mapFragment) {
@@ -513,6 +523,11 @@ public class MapViewPager extends FrameLayout implements OnMapReadyCallback {
 
         public Builder callback(@Nullable Callback callback) {
             this.callback = callback;
+            return this;
+        }
+
+        public Builder position(int position) {
+            this.position = position;
             return this;
         }
 

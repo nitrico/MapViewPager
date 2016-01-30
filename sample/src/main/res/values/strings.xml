@@ -1,16 +1,20 @@
 <resources>
 
     <string name="app_name">MapViewPager</string>
+    <string name="author">Miguel Ángel Moreno</string>
+    <string name="url">https://github.com/nitrico/mapviewpager</string>
+
+    <string name="github">GitHub project</string>
+    <string name="share">Share</string>
 
     <string name="sample_1">Sample 1</string>
     <string name="sample_2">Sample 2</string>
-    <string name="sample_3">Sample 3</string>
-    <string name="sample_4">Sample 4</string>
 
-    <string name="details_1">Details 1</string>
-    <string name="details_2">Details 2</string>
-    <string name="details_3">Details 3</string>
-    <string name="details_4">Details 4</string>
+    <string name="details_1"><![CDATA[• One marker per fragment\n• Default layout]]></string>
+    <string name="details_2"><![CDATA[• Any amount of markers per fragment\n• Custom layout\n• Custom initial position]]></string>
+
+    <string name="item_1">Item 1</string>
+    <string name="item_2">Item 2</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 

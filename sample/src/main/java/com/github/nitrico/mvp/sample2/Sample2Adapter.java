@@ -21,21 +21,21 @@ public class Sample2Adapter extends MapViewPager.MultiAdapter {
     public static final String[] BELGIUM_TITLES = { "Brussels" };
 
     public static final CameraPosition LONDON
-            = CameraPosition.builder().target(new LatLng(51.5287352,-0.381784)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(51.5287352,-0.381784), 6f);
     public static final CameraPosition PARIS
-            = CameraPosition.builder().target(new LatLng(48.859,2.2074722)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(48.859,2.2074722), 6f);
     public static final CameraPosition BARCELONA
-            = CameraPosition.builder().target(new LatLng(41.3948976,2.0787274)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(41.3948976,2.0787274), 6f);
     public static final CameraPosition MADRID
-            = CameraPosition.builder().target(new LatLng(40.4381311,-3.8196227)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(40.4381311,-3.8196227), 6f);
     public static final CameraPosition VALENCIA
-            = CameraPosition.builder().target(new LatLng(39.4079665,-0.5015975)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(39.4079665,-0.5015975), 6f);
     public static final CameraPosition MILAN
-            = CameraPosition.builder().target(new LatLng(45.4628329,9.107692)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(45.4628329,9.107692), 6f);
     public static final CameraPosition ROME
-            = CameraPosition.builder().target(new LatLng(41.9102415,12.3959121)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(41.9102415,12.3959121), 6f);
     public static final CameraPosition BRUSSELS
-            = CameraPosition.builder().target(new LatLng(50.8550625,4.3053499)).zoom(6f).build();
+            = CameraPosition.fromLatLngZoom(new LatLng(50.8550625,4.3053499), 6f);
 
     private LinkedList<CameraPosition> england;
     private LinkedList<CameraPosition> france;
@@ -46,20 +46,22 @@ public class Sample2Adapter extends MapViewPager.MultiAdapter {
 
     public Sample2Adapter(FragmentManager fm) {
         super(fm);
+
         // camera positions
         england = new LinkedList<>();
-        england.add(LONDON);
         france = new LinkedList<>();
-        france.add(PARIS);
         spain = new LinkedList<>();
+        portugal = new LinkedList<>();
+        italy = new LinkedList<>();
+        belgium = new LinkedList<>();
+
+        england.add(LONDON);
+        france.add(PARIS);
         spain.add(BARCELONA);
         spain.add(MADRID);
         spain.add(VALENCIA);
-        portugal = new LinkedList<>();
-        italy = new LinkedList<>();
         italy.add(MILAN);
         italy.add(ROME);
-        belgium = new LinkedList<>();
         belgium.add(BRUSSELS);
     }
 

@@ -29,9 +29,7 @@
         </activity>
 
         <activity android:name=".sample1.Sample1Activity" />
-        <activity android:name=".sample2.Sample2Activity" />
-        <activity android:name=".sample3.Sample3Activity" />
-        <activity android:name=".sample4.Sample4Activity" android:theme="@style/NoActionBar" />
+        <activity android:name=".sample2.Sample2Activity" android:theme="@style/NoActionBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"
