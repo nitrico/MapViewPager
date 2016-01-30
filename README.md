@@ -79,7 +79,7 @@ MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
         .build();
 ```
 
-> Remember that mapFragment is a Fragment, not a View! To find it: `mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapFragment)`
+> Remember that mapFragment is a Fragment, not a View! To find it: `mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapFragment);`
 
 Check the examples in the [sample folder](https://github.com/nitrico/mapviewpager/tree/master/sample).
 
