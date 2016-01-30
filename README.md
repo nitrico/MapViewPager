@@ -68,7 +68,7 @@ If you want more control on how to display the map and the ViewPager, for exampl
 
 ```java
 MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
-        .mapFragment(map)                         // map is SupportMapFragment
+        .mapFragment(mapFragment)                 // mapFragment is SupportMapFragment
         .viewPager(viewPager)                     // viewPager is ViewPager
         .adapter(adapter)                         // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
         .position(initialPosition)                // Optional initialPosition is int     
@@ -78,6 +78,8 @@ MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
         .mapOffset(offset)                        // Optional
         .build();
 ```
+
+> Remember that mapFragment is a Fragment, not a view, so find it with `(SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.map)`
 
 Check the examples in the [sample folder](https://github.com/nitrico/mapviewpager/tree/master/sample).
 
@@ -150,7 +152,7 @@ List<CameraPosition> getCameraPositions(int page)
 String getMarkerTitle(int page, int position)
 ```
 
-Both adapters extends from FragmentStatePagerAdapter, so you also need to override
+Both adapters extends from `FragmentStatePagerAdapter`, so you also need to override
 ```java
 CharSequence getPageTitle(int position) // this will be used as marker title in MapViewPager.Adapter
 Fragment getItem(int position)
