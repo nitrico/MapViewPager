@@ -71,6 +71,7 @@ MapViewPager mvp = new MapViewPager.Builder(this) // this is Context
         .mapFragment(map)                         // map is SupportMapFragment
         .viewPager(viewPager)                     // viewPager is ViewPager
         .adapter(adapter)                         // adapter is MapViewPager.Adapter or MapViewPager.MultiAdapter
+        .position(initialPosition)                // Optional initialPosition is int     
         .callback(callback)                       // Optional callback is MapViewPager.Callback
         .markersAlpha(alpha)                      // Optional
         .mapPadding(left, top, right, bottom)     // Optional
@@ -92,7 +93,7 @@ They are all optional.
 |viewPagerWeight|integer|`1`|Weight of the viewpager in the layout|
 |mapWeight|integer|`1`|Weight of the map in the layout|
 |mapGravity|integer (0..3)|`1`|Position of the map in the layout: 0=left, 1=top, 2=right, 3=bottom|
-|mapOffset|dimension|`56dp`|Map *padding* for multiple markers on the map|
+|mapOffset|dimension|`32dp`|Map *padding* for multiple markers on the map|
 |mapPaddingLeft|dimension|`0dp`|Left map padding|
 |mapPaddingTop|dimension|`0dp`|Top map padding|
 |mapPaddingRight|dimension|`0dp`|Right map padding|
@@ -102,8 +103,18 @@ They are all optional.
 #### Public methods
 
 ```java
-void start(FragmentActivity activity, MapViewPager.AbsAdapter adapter) 
-void start(FragmentActivity activity, MapViewPager.AbsAdapter adapter, MapViewPager.Callback callback)
+void start(@NonNull FragmentActivity activity,
+           @NonNull MapViewPager.AbsAdapter mapAdapter)
+void start(@NonNull FragmentActivity activity,
+           @NonNull MapViewPager.AbsAdapter mapAdapter,
+           @Nullable MapViewPager.Callback callback)
+void start(@NonNull FragmentActivity activity,
+           @NonNull MapViewPager.AbsAdapter mapAdapter,
+           int initialPosition) 
+void start(@NonNull FragmentActivity activity, 
+           @NonNull MapViewPager.AbsAdapter mapAdapter,
+           int initialPosition,
+           @Nullable MapViewPager.Callback callback)
 
 GoogleMap getMap()
 SupportMapFragment getMapFragment()
@@ -131,16 +142,20 @@ void onMapViewPagerReady()
 To override in **MapViewPager.Adapter** effective classes
 ```java
 CameraPosition getCameraPosition(int position)
-CharSequence getPageTitle(int position)
 ```
 
 To override in **MapViewPager.MultiAdapter** effective classes
 ```java
 List<CameraPosition> getCameraPositions(int page)
-CharSequence getPageTitle(int position)
 String getMarkerTitle(int page, int position)
 ```
 
+Both adapters extends from FragmentStatePagerAdapter, so you also need to override
+```java
+CharSequence getPageTitle(int position) // this will be used as marker title in MapViewPager.Adapter
+Fragment getItem(int position)
+int getCount()
+```
 
 ## Author
 
@@ -153,7 +168,7 @@ I'm available to be hired, Contact me!
 
 
 ## License
-```
+```txt
 Copyright 2016 Miguel Ángel Moreno
 
 Licensed under the Apache License, Version 2.0 (the "License");
