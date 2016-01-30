@@ -25,12 +25,6 @@ Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/
 #### Gradle
 
 ```gradle
-repositories {
-    maven {
-        url  "http://dl.bintray.com/moreno/maven" 
-    }
-}
-
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
