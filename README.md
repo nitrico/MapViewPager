@@ -7,7 +7,7 @@ Android library that connects ViewPager fragments with Google Maps markers and m
 ![screenshot](https://raw.githubusercontent.com/nitrico/mapviewpager/master/screenshot1.png)
 ![screenshot](https://raw.githubusercontent.com/nitrico/mapviewpager/master/screenshot2.png)  
 
-Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
+Check out the **[sample apk](https://github.com/nitrico/mapviewpager/raw/master/MapViewPager.apk)** !
 
 #### Notice
 * **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
