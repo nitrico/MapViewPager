@@ -1,5 +1,6 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/mapviewpager/images/download.svg)
-](https://bintray.com/moreno/maven/mapviewpager/_latestVersion) 
+](https://bintray.com/moreno/maven/mapviewpager/_latestVersion)
+[![License](https://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # MapViewPager
 
