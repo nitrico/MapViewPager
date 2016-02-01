@@ -1,12 +1,15 @@
-[![Download](https://api.bintray.com/packages/moreno/maven/mapviewpager/images/download.svg) ](https://bintray.com/moreno/maven/mapviewpager/_latestVersion)
+[![Download](https://api.bintray.com/packages/moreno/maven/mapviewpager/images/download.svg)](https://bintray.com/moreno/maven/mapviewpager/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MapViewPager-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3087)
+[![License](https://img.shields.io/:License-Apache-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # MapViewPager
 
-Android library that connects ViewPager fragments with Google Maps markers and makes them work together.
+Android library that connects ViewPager fragments with Google Maps markers.
 
-![screenshot](http://i.imgur.com/tZ7wO4D.png) ![screenshot](http://i.imgur.com/mfbp5ps.png) ![screenshot](http://i.imgur.com/C4dVMU7.png)
+![screenshot](https://raw.githubusercontent.com/nitrico/mapviewpager/master/screenshot1.png)
+![screenshot](https://raw.githubusercontent.com/nitrico/mapviewpager/master/screenshot2.png)  
 
-Check out the **[sample apk](https://github.com/nitrico/MapViewPager/raw/master/MapViewPager.apk)** !
+Check out the **[sample apk](https://github.com/nitrico/mapviewpager/raw/master/MapViewPager.apk)** !
 
 #### Notice
 * **Not fully tested yet**, but it works perfectly on my Nexus 5 running Marshmallow.
